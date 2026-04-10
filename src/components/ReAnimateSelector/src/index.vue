@@ -4,14 +4,14 @@ import { animates } from "./animate";
 import { cloneDeep } from "@pureadmin/utils";
 
 defineOptions({
-  name: "ReAnimateSelector"
+  name: "ReAnimateSelector",
 });
 
 defineProps({
   placeholder: {
     type: String,
-    default: "请选择动画"
-  }
+    default: "请选择动画",
+  },
 });
 
 const inputValue = defineModel({ type: String });
@@ -31,7 +31,7 @@ const animateClass = computed(() => {
     "transition-all",
     "border-[#e5e7eb]",
     "hover:text-primary",
-    "hover:duration-700"
+    "hover:duration-700",
   ];
 });
 
@@ -40,7 +40,7 @@ const animateStyle = computed(
     inputValue.value === i
       ? {
           borderColor: "var(--el-color-primary)",
-          color: "var(--el-color-primary)"
+          color: "var(--el-color-primary)",
         }
       : ""
 );
@@ -55,19 +55,17 @@ function onClear() {
 
 function filterMethod(value: any) {
   searchVal.value = value;
-  animatesList.value = copyAnimatesList.value.filter((i: string | any[]) =>
-    i.includes(value)
-  );
+  animatesList.value = copyAnimatesList.value.filter((i: string | any[]) => i.includes(value));
 }
 
 const animateMap = ref({});
 function onMouseEnter(index: string | number) {
   animateMap.value[index] = animateMap.value[index]?.loading
     ? Object.assign({}, animateMap.value[index], {
-        loading: false
+        loading: false,
       })
     : Object.assign({}, animateMap.value[index], {
-        loading: true
+        loading: true,
       });
 }
 function onMouseleave() {
@@ -106,10 +104,8 @@ function onMouseleave() {
               <h4
                 :class="[
                   `animate__animated animate__${
-                    animateMap[index]?.loading
-                      ? animate + ' animate__infinite'
-                      : ''
-                  } `
+                    animateMap[index]?.loading ? animate + ' animate__infinite' : ''
+                  } `,
                 ]"
               >
                 {{ animate }}

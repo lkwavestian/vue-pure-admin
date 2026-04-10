@@ -3,7 +3,7 @@ import { ref } from "vue";
 import { list } from "./base/list";
 
 defineOptions({
-  name: "PureTable"
+  name: "PureTable",
 });
 
 const selected = ref(0);
@@ -26,8 +26,7 @@ function tabClick({ index }) {
           >
             el-table
           </el-link>
-          完全兼容 api 并提供灵活的配置项以及完善的类型提示，不用将代码都写在
-          template 里了
+          完全兼容 api 并提供灵活的配置项以及完善的类型提示，不用将代码都写在 template 里了
           <el-link
             href="https://github.com/pure-admin/pure-admin-table"
             target="_blank"
@@ -60,7 +59,7 @@ function tabClick({ index }) {
             <span
               v-tippy="{
                 maxWidth: 'none',
-                content: `（第 ${index + 1} 个示例）${item.content}`
+                content: `（第 ${index + 1} 个示例）${item.content}`,
               }"
             >
               {{ item.title }}

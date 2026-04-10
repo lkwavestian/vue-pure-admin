@@ -7,12 +7,12 @@ import { deviceDetection } from "@pureadmin/utils";
 defineProps({
   noticeItem: {
     type: Object as PropType<ListItem>,
-    default: () => {}
+    default: () => {},
   },
   isLast: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 });
 
 const titleRef = ref(null);
@@ -36,9 +36,8 @@ function hoverDescription(event, description) {
   tempTag.innerText = description;
   tempTag.className = "getDescriptionWidth";
   document.querySelector("body").appendChild(tempTag);
-  const currentWidth = (
-    document.querySelector(".getDescriptionWidth") as HTMLSpanElement
-  ).offsetWidth;
+  const currentWidth = (document.querySelector(".getDescriptionWidth") as HTMLSpanElement)
+    .offsetWidth;
   document.querySelector(".getDescriptionWidth").remove();
 
   // cellWidth为容器的宽度
@@ -56,7 +55,7 @@ function hoverDescription(event, description) {
     :class="[
       'notice-container',
       'border-0 border-solid border-[#f0f0f0] dark:border-[#303030]',
-      { 'border-b': !isLast }
+      { 'border-b': !isLast },
     ]"
   >
     <el-avatar
@@ -75,11 +74,7 @@ function hoverDescription(event, description) {
           placement="top-start"
           :enterable="!isMobile"
         >
-          <div
-            ref="titleRef"
-            class="notice-title-content"
-            @mouseover="hoverTitle"
-          >
+          <div ref="titleRef" class="notice-title-content" @mouseover="hoverTitle">
             {{ noticeItem.title }}
           </div>
         </el-tooltip>

@@ -4,7 +4,7 @@ import { useDark } from "@pureadmin/utils";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";
 
 defineOptions({
-  name: "PureButton"
+  name: "PureButton",
 });
 
 const { isDark } = useDark();
@@ -16,39 +16,37 @@ const buttonList = [
   {
     type: "",
     text: "Default",
-    icon: "ep:search"
+    icon: "ep:search",
   },
   {
     type: "primary",
     text: "Primary",
-    icon: "ep:edit"
+    icon: "ep:edit",
   },
   {
     type: "success",
     text: "Success",
-    icon: "ep:check"
+    icon: "ep:check",
   },
   {
     type: "info",
     text: "Info",
-    icon: "ep:message"
+    icon: "ep:message",
   },
   {
     type: "warning",
     text: "Warning",
-    icon: "ep:star"
+    icon: "ep:star",
   },
   {
     type: "danger",
     text: "Danger",
-    icon: "ep:delete"
-  }
+    icon: "ep:delete",
+  },
 ];
 
-watch(size, val =>
-  val === "disabled"
-    ? (dynamicSize.value = "default")
-    : (dynamicSize.value = size.value)
+watch(size, (val) =>
+  val === "disabled" ? (dynamicSize.value = "default") : (dynamicSize.value = size.value)
 );
 </script>
 
@@ -59,7 +57,7 @@ watch(size, val =>
         <el-space wrap :size="40">
           <el-link
             v-tippy="{
-              content: '点击查看详细文档'
+              content: '点击查看详细文档',
             }"
             href="https://element-plus.org/zh-CN/component/button.html"
             target="_blank"
@@ -167,9 +165,7 @@ watch(size, val =>
     <el-divider />
 
     <div class="mb-4">自定义元素标签。例如：按钮、div、链接</div>
-    <el-button :size="dynamicSize" :disabled="size === 'disabled'">
-      button 标签
-    </el-button>
+    <el-button :size="dynamicSize" :disabled="size === 'disabled'"> button 标签 </el-button>
     <el-button
       tag="div"
       role="button"
@@ -198,12 +194,7 @@ watch(size, val =>
 
     <div class="mb-4">自定义颜色</div>
     <el-space wrap>
-      <el-button
-        color="#626aef"
-        :size="dynamicSize"
-        :disabled="size === 'disabled'"
-        :dark="isDark"
-      >
+      <el-button color="#626aef" :size="dynamicSize" :disabled="size === 'disabled'" :dark="isDark">
         Default
       </el-button>
       <el-button

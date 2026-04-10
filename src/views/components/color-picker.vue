@@ -2,7 +2,7 @@
 import { ref, watch } from "vue";
 
 defineOptions({
-  name: "ColorPicker"
+  name: "ColorPicker",
 });
 
 const size = ref("default");
@@ -26,13 +26,11 @@ const predefineColors = ref([
   "hsva(120, 40, 94, 0.5)",
   "hsl(181, 100%, 37%)",
   "hsla(209, 100%, 56%, 0.73)",
-  "#c7158577"
+  "#c7158577",
 ]);
 
-watch(size, val =>
-  val === "disabled"
-    ? (dynamicSize.value = "default")
-    : (dynamicSize.value = size.value)
+watch(size, (val) =>
+  val === "disabled" ? (dynamicSize.value = "default") : (dynamicSize.value = size.value)
 );
 
 function onClick() {
@@ -48,7 +46,7 @@ function onClick() {
         <el-space wrap :size="40">
           <el-link
             v-tippy="{
-              content: '点击查看详细文档'
+              content: '点击查看详细文档',
             }"
             href="https://element-plus.org/zh-CN/component/color-picker.html"
             target="_blank"
@@ -93,11 +91,7 @@ function onClick() {
         :size="dynamicSize"
         :disabled="size === 'disabled'"
       />
-      <el-button
-        :size="dynamicSize"
-        :disabled="size === 'disabled'"
-        @click="onClick"
-      >
+      <el-button :size="dynamicSize" :disabled="size === 'disabled'" @click="onClick">
         {{ isOpen ? "关闭" : "打开" }}
       </el-button>
     </el-space>

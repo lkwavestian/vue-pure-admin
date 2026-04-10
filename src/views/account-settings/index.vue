@@ -18,7 +18,7 @@ import SecurityLogIcon from "~icons/ri/window-line";
 import AccountManagementIcon from "~icons/ri/profile-line";
 
 defineOptions({
-  name: "AccountSettings"
+  name: "AccountSettings",
 });
 
 const router = useRouter();
@@ -31,33 +31,33 @@ onBeforeMount(() => {
 const userInfo = ref({
   avatar: "",
   username: "",
-  nickname: ""
+  nickname: "",
 });
 const panes = [
   {
     key: "profile",
     label: "个人信息",
     icon: ProfileIcon,
-    component: Profile
+    component: Profile,
   },
   {
     key: "preferences",
     label: "偏好设置",
     icon: PreferencesIcon,
-    component: Preferences
+    component: Preferences,
   },
   {
     key: "securityLog",
     label: "安全日志",
     icon: SecurityLogIcon,
-    component: SecurityLog
+    component: SecurityLog,
   },
   {
     key: "accountManagement",
     label: "账户管理",
     icon: AccountManagementIcon,
-    component: AccountManagement
-  }
+    component: AccountManagement,
+  },
 ];
 const witchPane = ref("profile");
 
@@ -81,9 +81,7 @@ onMounted(async () => {
           class="h-12.5! text-(--pure-theme-menu-text) cursor-pointer text-sm transition-all duration-300 ease-in-out hover:scale-105 will-change-transform transform-gpu origin-center hover:text-base! hover:text-(--pure-theme-menu-title-hover)!"
           @click="router.go(-1)"
         >
-          <div
-            class="h-full flex items-center px-(--el-menu-base-level-padding)"
-          >
+          <div class="h-full flex items-center px-(--el-menu-base-level-padding)">
             <IconifyIconOffline :icon="leftLine" />
             <span class="ml-2">返回</span>
           </div>
@@ -127,7 +125,7 @@ onMounted(async () => {
         @toggleClick="isOpen = !isOpen"
       />
       <component
-        :is="panes.find(item => item.key === witchPane).component"
+        :is="panes.find((item) => item.key === witchPane).component"
         :class="[!deviceDetection() && 'ml-30']"
       />
     </el-main>

@@ -9,7 +9,7 @@ import { useRenderIcon } from "@/components/ReIcon/src/hooks";
 import AddFill from "~icons/ri/add-circle-line";
 
 defineOptions({
-  name: "CardList"
+  name: "CardList",
 });
 
 const svg = `
@@ -28,7 +28,7 @@ const INITIAL_DATA = {
   status: "",
   description: "",
   type: "",
-  mark: ""
+  mark: "",
 };
 
 const pagination = ref({ current: 1, pageSize: 12, total: 0 });
@@ -43,7 +43,7 @@ const getCardListData = async () => {
       productList.value = data.list;
       pagination.value = {
         ...pagination.value,
-        total: data.list.length
+        total: data.list.length,
       };
     }
   } catch (e) {
@@ -70,14 +70,12 @@ const onPageSizeChange = (size: number) => {
 const onCurrentChange = (current: number) => {
   pagination.value.current = current;
 };
-const handleDeleteItem = product => {
+const handleDeleteItem = (product) => {
   ElMessageBox.confirm(
-    product
-      ? `确认删除后${product.name}的所有产品信息将被清空, 且无法恢复`
-      : "",
+    product ? `确认删除后${product.name}的所有产品信息将被清空, 且无法恢复` : "",
     "提示",
     {
-      type: "warning"
+      type: "warning",
     }
   )
     .then(() => {
@@ -85,7 +83,7 @@ const handleDeleteItem = product => {
     })
     .catch(() => {});
 };
-const handleManageProduct = product => {
+const handleManageProduct = (product) => {
   formDialogVisible.value = true;
   nextTick(() => {
     formData.value = { ...product, status: product?.isSetup ? "1" : "0" };
@@ -96,24 +94,13 @@ const handleManageProduct = product => {
 <template>
   <div>
     <div class="w-full flex justify-between mb-4">
-      <el-button
-        :icon="useRenderIcon(AddFill)"
-        @click="formDialogVisible = true"
-      >
+      <el-button :icon="useRenderIcon(AddFill)" @click="formDialogVisible = true">
         新建产品
       </el-button>
-      <el-input
-        v-model="searchValue"
-        style="width: 300px"
-        placeholder="请输入产品名称"
-        clearable
-      >
+      <el-input v-model="searchValue" style="width: 300px" placeholder="请输入产品名称" clearable>
         <template #suffix>
           <el-icon class="el-input__icon">
-            <IconifyIconOffline
-              v-show="searchValue.length === 0"
-              icon="ri/search-line"
-            />
+            <IconifyIconOffline v-show="searchValue.length === 0" icon="ri/search-line" />
           </el-icon>
         </template>
       </el-input>
@@ -130,9 +117,7 @@ const handleManageProduct = product => {
               pagination.pageSize * (pagination.current - 1),
               pagination.pageSize * pagination.current
             )
-            .filter(v =>
-              v.name.toLowerCase().includes(searchValue.toLowerCase())
-            ).length === 0
+            .filter((v) => v.name.toLowerCase().includes(searchValue.toLowerCase())).length === 0
         "
         :description="`${searchValue} 产品不存在`"
       />
@@ -144,9 +129,7 @@ const handleManageProduct = product => {
                 pagination.pageSize * (pagination.current - 1),
                 pagination.pageSize * pagination.current
               )
-              .filter(v =>
-                v.name.toLowerCase().includes(searchValue.toLowerCase())
-              )"
+              .filter((v) => v.name.toLowerCase().includes(searchValue.toLowerCase()))"
             :key="index"
             :xs="24"
             :sm="12"

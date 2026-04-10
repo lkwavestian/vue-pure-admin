@@ -9,7 +9,7 @@ import Delete from "~icons/ep/delete";
 import Refresh from "~icons/ep/refresh";
 
 defineOptions({
-  name: "OperationLog"
+  name: "OperationLog",
 });
 
 const formRef = ref();
@@ -29,7 +29,7 @@ const {
   handleSizeChange,
   onSelectionCancel,
   handleCurrentChange,
-  handleSelectionChange
+  handleSelectionChange,
 } = useRole(tableRef);
 </script>
 
@@ -42,20 +42,10 @@ const {
       class="search-form bg-bg_color w-full pl-8 pt-3 overflow-auto"
     >
       <el-form-item label="所属模块" prop="module">
-        <el-input
-          v-model="form.module"
-          placeholder="请输入所属模块"
-          clearable
-          class="w-42.5!"
-        />
+        <el-input v-model="form.module" placeholder="请输入所属模块" clearable class="w-42.5!" />
       </el-form-item>
       <el-form-item label="操作状态" prop="status">
-        <el-select
-          v-model="form.status"
-          placeholder="请选择"
-          clearable
-          class="w-37.5!"
-        >
+        <el-select v-model="form.status" placeholder="请选择" clearable class="w-37.5!">
           <el-option label="成功" value="1" />
           <el-option label="失败" value="0" />
         </el-select>
@@ -79,23 +69,15 @@ const {
         >
           搜索
         </el-button>
-        <el-button :icon="useRenderIcon(Refresh)" @click="resetForm(formRef)">
-          重置
-        </el-button>
+        <el-button :icon="useRenderIcon(Refresh)" @click="resetForm(formRef)"> 重置 </el-button>
       </el-form-item>
     </el-form>
 
-    <PureTableBar
-      title="操作日志（仅演示，操作后不生效）"
-      :columns="columns"
-      @refresh="onSearch"
-    >
+    <PureTableBar title="操作日志（仅演示，操作后不生效）" :columns="columns" @refresh="onSearch">
       <template #buttons>
         <el-popconfirm title="确定要删除所有日志数据吗？" @confirm="clearAll">
           <template #reference>
-            <el-button type="danger" :icon="useRenderIcon(Delete)">
-              清空日志
-            </el-button>
+            <el-button type="danger" :icon="useRenderIcon(Delete)"> 清空日志 </el-button>
           </template>
         </el-popconfirm>
       </template>
@@ -112,9 +94,7 @@ const {
             >
               已选 {{ selectedNum }} 项
             </span>
-            <el-button type="primary" text @click="onSelectionCancel">
-              取消选择
-            </el-button>
+            <el-button type="primary" text @click="onSelectionCancel"> 取消选择 </el-button>
           </div>
           <el-popconfirm title="是否确认删除?" @confirm="onbatchDel">
             <template #reference>
@@ -136,7 +116,7 @@ const {
           :pagination="{ ...pagination, size }"
           :header-cell-style="{
             background: 'var(--el-fill-color-light)',
-            color: 'var(--el-text-color-primary)'
+            color: 'var(--el-text-color-primary)',
           }"
           @selection-change="handleSelectionChange"
           @page-size-change="handleSizeChange"

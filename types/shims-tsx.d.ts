@@ -17,9 +17,10 @@ type PascalToKebab<S extends string> = S extends `${infer F}${infer R}`
 
 /** 从 `GlobalComponents` 自动生成 `kebab-case` 的 `props` 类型 */
 type KebabComponents = {
-  [K in keyof import("vue").GlobalComponents as PascalToKebab<
-    K & string
-  >]: InstanceType<import("vue").GlobalComponents[K]>["$props"] & ReservedProps;
+  [K in keyof import("vue").GlobalComponents as PascalToKebab<K & string>]: InstanceType<
+    import("vue").GlobalComponents[K]
+  >["$props"] &
+    ReservedProps;
 };
 
 declare module "vue/jsx-runtime" {

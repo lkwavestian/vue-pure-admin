@@ -3,8 +3,7 @@ import { ref } from "vue";
 import { useColumns } from "./columns";
 
 const printRef = ref();
-const { columns, dataList, print, cellStyle, rowStyle, headerCellStyle } =
-  useColumns(printRef);
+const { columns, dataList, print, cellStyle, rowStyle, headerCellStyle } = useColumns(printRef);
 </script>
 
 <template>

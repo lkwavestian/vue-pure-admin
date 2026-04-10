@@ -13,8 +13,6 @@ const model = ref("radio");
       <el-radio-button value="multiple">多选</el-radio-button>
     </el-radio-group>
     <el-divider direction="vertical" />
-    <component
-      :is="model === 'radio' ? radioSelectTable : multipleSelectTable"
-    />
+    <component :is="model === 'radio' ? radioSelectTable : multipleSelectTable" />
   </el-space>
 </template>

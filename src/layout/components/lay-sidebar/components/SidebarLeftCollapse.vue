@@ -11,7 +11,7 @@ interface Props {
 }
 
 withDefaults(defineProps<Props>(), {
-  isActive: false
+  isActive: false,
 });
 
 const { t } = useI18n();
@@ -25,7 +25,7 @@ const iconClass = computed(() => {
     "inline-block!",
     "align-middle",
     "cursor-pointer",
-    "duration-100"
+    "duration-100",
   ];
 });
 
@@ -45,12 +45,10 @@ const toggleClick = () => {
   <div class="left-collapse">
     <IconifyIconOffline
       v-tippy="{
-        content: isActive
-          ? t('buttons.pureClickCollapse')
-          : t('buttons.pureClickExpand'),
+        content: isActive ? t('buttons.pureClickCollapse') : t('buttons.pureClickExpand'),
         theme: tooltipEffect,
         hideOnClick: 'toggle',
-        placement: 'right'
+        placement: 'right',
       }"
       :icon="MenuFold"
       :class="[iconClass, themeColor === 'light' ? '' : 'text-primary']"

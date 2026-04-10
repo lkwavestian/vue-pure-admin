@@ -7,7 +7,7 @@ import Search from "~icons/ri/search-eye-line";
 type ParameterCSSProperties = (item?: string) => CSSProperties | undefined;
 
 defineOptions({
-  name: "IconSelect"
+  name: "IconSelect",
 });
 
 const inputValue = defineModel({ type: String });
@@ -28,43 +28,37 @@ const filterValue = ref("");
 const tabsList = [
   {
     label: "Element Plus",
-    name: "ep:"
+    name: "ep:",
   },
   {
     label: "Remix Icon",
-    name: "ri:"
+    name: "ri:",
   },
   {
     label: "Font Awesome 5 Solid",
-    name: "fa-solid:"
-  }
+    name: "fa-solid:",
+  },
 ];
 
 const pageList = computed(() =>
   copyIconList[currentActiveType.value]
-    .filter(i => i.includes(filterValue.value))
-    .slice(
-      (currentPage.value - 1) * pageSize.value,
-      currentPage.value * pageSize.value
-    )
+    .filter((i) => i.includes(filterValue.value))
+    .slice((currentPage.value - 1) * pageSize.value, currentPage.value * pageSize.value)
 );
 
 const iconItemStyle = computed((): ParameterCSSProperties => {
-  return item => {
+  return (item) => {
     if (inputValue.value === currentActiveType.value + item) {
       return {
         borderColor: "var(--el-color-primary)",
-        color: "var(--el-color-primary)"
+        color: "var(--el-color-primary)",
       };
     }
   };
 });
 
 function setVal() {
-  currentActiveType.value = inputValue.value.substring(
-    0,
-    inputValue.value.indexOf(":") + 1
-  );
+  currentActiveType.value = inputValue.value.substring(0, inputValue.value.indexOf(":") + 1);
   icon.value = inputValue.value.substring(inputValue.value.indexOf(":") + 1);
 }
 
@@ -72,9 +66,7 @@ function onBeforeEnter() {
   if (isAllEmpty(icon.value)) return;
   setVal();
   // 寻找当前图标在第几页
-  const curIconIndex = copyIconList[currentActiveType.value].findIndex(
-    i => i === icon.value
-  );
+  const curIconIndex = copyIconList[currentActiveType.value].findIndex((i) => i === icon.value);
   currentPage.value = Math.ceil((curIconIndex + 1) / pageSize.value);
 }
 
@@ -104,14 +96,14 @@ function onClear() {
 watch(
   () => pageList.value,
   () =>
-    (totalPage.value = copyIconList[currentActiveType.value].filter(i =>
+    (totalPage.value = copyIconList[currentActiveType.value].filter((i) =>
       i.includes(filterValue.value)
     ).length),
   { immediate: true }
 );
 watch(
   () => inputValue.value,
-  val => val && setVal(),
+  (val) => val && setVal(),
   { immediate: true }
 );
 watch(
@@ -129,7 +121,7 @@ watch(
           trigger="click"
           popper-class="pure-popper"
           :popper-options="{
-            placement: 'auto'
+            placement: 'auto',
           }"
           @before-enter="onBeforeEnter"
           @after-leave="onAfterLeave"
@@ -141,12 +133,7 @@ watch(
             </div>
           </template>
 
-          <el-input
-            v-model="filterValue"
-            class="px-2 pt-2"
-            placeholder="搜索图标"
-            clearable
-          />
+          <el-input v-model="filterValue" class="px-2 pt-2" placeholder="搜索图标" clearable />
 
           <el-tabs v-model="currentActiveType" @tab-click="handleClick">
             <el-tab-pane
@@ -181,9 +168,7 @@ watch(
             </el-tab-pane>
           </el-tabs>
 
-          <div
-            class="w-full h-9 flex items-center overflow-auto border-t border-[#e5e7eb]"
-          >
+          <div class="w-full h-9 flex items-center overflow-auto border-t border-[#e5e7eb]">
             <el-pagination
               class="flex-auto ml-2"
               :total="totalPage"

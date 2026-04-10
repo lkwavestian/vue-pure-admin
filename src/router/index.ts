@@ -7,13 +7,7 @@ import { buildHierarchyTree } from "@/utils/tree";
 import remainingRouter from "./modules/remaining";
 import { useMultiTagsStoreHook } from "@/store/modules/multiTags";
 import { usePermissionStoreHook } from "@/store/modules/permission";
-import {
-  isUrl,
-  openLink,
-  cloneDeep,
-  isAllEmpty,
-  storageLocal
-} from "@pureadmin/utils";
+import { isUrl, openLink, cloneDeep, isAllEmpty, storageLocal } from "@pureadmin/utils";
 import {
   ascending,
   getTopMenu,
@@ -23,20 +17,10 @@ import {
   findRouteByPath,
   handleAliveRoute,
   formatTwoStageRoutes,
-  formatFlatteningRoutes
+  formatFlatteningRoutes,
 } from "./utils";
-import {
-  type Router,
-  type RouteRecordRaw,
-  type RouteComponent,
-  createRouter
-} from "vue-router";
-import {
-  type DataInfo,
-  userKey,
-  removeToken,
-  multipleTabsKey
-} from "@/utils/auth";
+import { type Router, type RouteRecordRaw, type RouteComponent, createRouter } from "vue-router";
+import { type DataInfo, userKey, removeToken, multipleTabsKey } from "@/utils/auth";
 
 /** 自动导入全部静态路由，无需再手动引入！匹配 src/router/modules 目录（任何嵌套级别）中具有 .ts 扩展名的所有文件，除了 remaining.ts 文件
  * 如何匹配所有文件请看：https://github.com/mrmlnc/fast-glob#basic-syntax
@@ -45,14 +29,14 @@ import {
 const modules: Record<string, any> = import.meta.glob(
   ["./modules/**/*.ts", "!./modules/**/remaining.ts"],
   {
-    eager: true
+    eager: true,
   }
 );
 
 /** 原始静态路由（未做任何处理） */
 const routes = [];
 
-Object.keys(modules).forEach(key => {
+Object.keys(modules).forEach((key) => {
   routes.push(modules[key].default);
 });
 
@@ -65,12 +49,12 @@ export const constantRoutes: Array<RouteRecordRaw> = formatTwoStageRoutes(
 const initConstantRoutes: Array<RouteRecordRaw> = cloneDeep(constantRoutes);
 
 /** 用于渲染菜单，保持原始层级 */
-export const constantMenus: Array<RouteComponent> = ascending(
-  routes.flat(Infinity)
-).concat(...remainingRouter);
+export const constantMenus: Array<RouteComponent> = ascending(routes.flat(Infinity)).concat(
+  ...remainingRouter
+);
 
 /** 不参与菜单的路由 */
-export const remainingPaths = Object.keys(remainingRouter).map(v => {
+export const remainingPaths = Object.keys(remainingRouter).map((v) => {
   return remainingRouter[v].path;
 });
 
@@ -80,18 +64,17 @@ export const router: Router = createRouter({
   routes: constantRoutes.concat(...(remainingRouter as any)),
   strict: true,
   scrollBehavior(to, from, savedPosition) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       if (savedPosition) {
         return savedPosition;
       } else {
         if (from.meta.saveSrollTop) {
-          const top: number =
-            document.documentElement.scrollTop || document.body.scrollTop;
+          const top: number = document.documentElement.scrollTop || document.body.scrollTop;
           resolve({ left: 0, top });
         }
       }
     });
-  }
+  },
 });
 
 /** 记录已经加载的页面路径 */
@@ -137,11 +120,10 @@ router.beforeEach((to: ToRouteType, _from) => {
   const userInfo = storageLocal().getItem<DataInfo<number>>(userKey);
   const externalLink = isUrl(to?.name as string);
   if (!externalLink) {
-    to.matched.some(item => {
+    to.matched.some((item) => {
       if (!item.meta.title) return "";
       const Title = getConfig().Title;
-      if (Title)
-        document.title = `${transformI18n(item.meta.title)} | ${Title}`;
+      if (Title) document.title = `${transformI18n(item.meta.title)} | ${Title}`;
       else document.title = transformI18n(item.meta.title);
     });
   }
@@ -169,17 +151,11 @@ router.beforeEach((to: ToRouteType, _from) => {
       }
     } else {
       // 刷新
-      if (
-        usePermissionStoreHook().wholeMenus.length === 0 &&
-        to.path !== "/login"
-      ) {
+      if (usePermissionStoreHook().wholeMenus.length === 0 && to.path !== "/login") {
         initRouter().then((router: Router) => {
           if (!useMultiTagsStoreHook().getMultiTagsCache) {
             const { path } = to;
-            const route = findRouteByPath(
-              path,
-              router.options.routes[0].children
-            );
+            const route = findRouteByPath(path, router.options.routes[0].children);
             getTopMenu(true);
             // query、params模式路由传参数的标签页不在此处处理
             if (route && route.meta?.title) {
@@ -189,14 +165,14 @@ router.beforeEach((to: ToRouteType, _from) => {
                 useMultiTagsStoreHook().handleTags("push", {
                   path,
                   name,
-                  meta
+                  meta,
                 });
               } else {
                 const { path, name, meta } = route;
                 useMultiTagsStoreHook().handleTags("push", {
                   path,
                   name,
-                  meta
+                  meta,
                 });
               }
             }
@@ -221,7 +197,7 @@ router.beforeEach((to: ToRouteType, _from) => {
   }
 });
 
-router.afterEach(to => {
+router.afterEach((to) => {
   loadedPaths.add(to.path);
   NProgress.done();
 });

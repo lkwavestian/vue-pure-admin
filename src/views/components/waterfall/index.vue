@@ -22,16 +22,16 @@ const options = reactive({
   breakpoints: {
     1200: {
       // 当屏幕宽度小于等于1200
-      rowPerView: 4
+      rowPerView: 4,
     },
     800: {
       // 当屏幕宽度小于等于800
-      rowPerView: 3
+      rowPerView: 3,
     },
     500: {
       // 当屏幕宽度小于等于500
-      rowPerView: 2
-    }
+      rowPerView: 2,
+    },
   },
   // 动画效果 https://animate.style/
   animationEffect: "animate__zoomInUp",
@@ -46,10 +46,10 @@ const options = reactive({
   // 加载配置
   loadProps: {
     loading,
-    error
+    error,
   },
   // 是否懒加载
-  lazyload: true
+  lazyload: true,
 });
 
 const page = ref(1);
@@ -66,13 +66,13 @@ function handleLoadMore() {
   loadingInstance.value = ElLoading.service({
     target: ".content",
     background: "transparent",
-    text: "加载中"
+    text: "加载中",
   });
-  return new Promise<void>(resolve => {
+  return new Promise<void>((resolve) => {
     getList({
       page: page.value,
-      pageSize: pageSize.value
-    }).then(res => {
+      pageSize: pageSize.value,
+    }).then((res) => {
       setTimeout(() => {
         list.value.push(...res);
         page.value += 1;
@@ -104,11 +104,7 @@ useInfiniteScroll(
 </script>
 
 <template>
-  <el-scrollbar
-    ref="scrollbarRef"
-    max-height="calc(100vh - 120px)"
-    class="content"
-  >
+  <el-scrollbar ref="scrollbarRef" max-height="calc(100vh - 120px)" class="content">
     <Waterfall :list="list" v-bind="options">
       <template #item="{ item, url, index }">
         <div
@@ -125,9 +121,7 @@ useInfiniteScroll(
             <h4 class="pb-4! text-gray-50 group-hover:text-yellow-300">
               {{ item.name }}
             </h4>
-            <div
-              class="pt-3 flex-bc border-t border-t-gray-600 border-opacity-50"
-            >
+            <div class="pt-3 flex-bc border-t border-t-gray-600 border-opacity-50">
               <div class="text-gray-50">$ {{ item.price }}</div>
               <div>
                 <button

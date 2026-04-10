@@ -18,25 +18,25 @@ const connection = reactive({
   password: "emqx_test",
   clean: true,
   connectTimeout: 30 * 1000, // ms
-  reconnectPeriod: 4000 // ms
+  reconnectPeriod: 4000, // ms
   // for more options and details, please refer to https://github.com/mqttjs/MQTT.js#mqttclientstreambuilder-options
 });
 
 // 订阅 topic/mqttx 主题
 const subscription = ref({
   topic: "topic/mqttx",
-  qos: 0 as any
+  qos: 0 as any,
 });
 
 // 发布 topic/browser 主题
 const publish = ref({
   topic: "topic/browser",
   qos: 0 as any,
-  payload: '{ "msg": "Hello, I am browser." }'
+  payload: '{ "msg": "Hello, I am browser." }',
 });
 
 let client = ref({
-  connected: false
+  connected: false,
 } as mqtt.MqttClient);
 
 const receivedMessages = ref("");
@@ -46,7 +46,7 @@ const retryTimes = ref(0);
 
 const initData = () => {
   client.value = {
-    connected: false
+    connected: false,
   } as mqtt.MqttClient;
   retryTimes.value = 0;
   btnLoadingType.value = "";
@@ -85,15 +85,13 @@ const createConnection = () => {
       client.value.on("reconnect", handleOnReConnect);
 
       // https://github.com/mqttjs/MQTT.js#event-error
-      client.value.on("error", error => {
+      client.value.on("error", (error) => {
         console.log("connection error:", error);
       });
 
       // https://github.com/mqttjs/MQTT.js#event-message
       client.value.on("message", (topic: string, message) => {
-        receivedMessages.value = receivedMessages.value.concat(
-          message.toString()
-        );
+        receivedMessages.value = receivedMessages.value.concat(message.toString());
         console.log(`received message: ${message} from topic: ${topic}`);
       });
     }
@@ -108,19 +106,15 @@ const createConnection = () => {
 const doSubscribe = () => {
   btnLoadingType.value = "subscribe";
   const { topic, qos } = subscription.value;
-  client.value.subscribe(
-    topic,
-    { qos },
-    (error: Error, granted: mqtt.ISubscriptionGrant[]) => {
-      btnLoadingType.value = "";
-      if (error) {
-        console.log("subscribe error:", error);
-        return;
-      }
-      subscribedSuccess.value = true;
-      console.log("subscribe successfully:", granted);
+  client.value.subscribe(topic, { qos }, (error: Error, granted: mqtt.ISubscriptionGrant[]) => {
+    btnLoadingType.value = "";
+    if (error) {
+      console.log("subscribe error:", error);
+      return;
     }
-  );
+    subscribedSuccess.value = true;
+    console.log("subscribe successfully:", granted);
+  });
 };
 
 // unsubscribe topic
@@ -128,7 +122,7 @@ const doSubscribe = () => {
 const doUnSubscribe = () => {
   btnLoadingType.value = "unsubscribe";
   const { topic, qos } = subscription.value;
-  client.value.unsubscribe(topic, { qos }, error => {
+  client.value.unsubscribe(topic, { qos }, (error) => {
     btnLoadingType.value = "";
     subscribedSuccess.value = false;
     if (error) {
@@ -144,7 +138,7 @@ const doUnSubscribe = () => {
 const doPublish = () => {
   btnLoadingType.value = "publish";
   const { topic, qos, payload } = publish.value;
-  client.value.publish(topic, payload, { qos }, error => {
+  client.value.publish(topic, payload, { qos }, (error) => {
     btnLoadingType.value = "";
     if (error) {
       console.log("publish error:", error);
@@ -201,12 +195,7 @@ onUnmounted(() => {
           MQTT.js
         </el-link>
         和 免费的公共MQTT代理
-        <el-link
-          type="primary"
-          underline="never"
-          href="broker.emqx.io"
-          target="_blank"
-        >
+        <el-link type="primary" underline="never" href="broker.emqx.io" target="_blank">
           EMQX
         </el-link>
         实现的一套 MQTT 客户端
@@ -226,10 +215,7 @@ onUnmounted(() => {
         <el-row :gutter="20">
           <el-col :span="8">
             <el-form-item prop="protocol" label="协议">
-              <el-select
-                v-model="connection.protocol"
-                @change="handleProtocolChange"
-              >
+              <el-select v-model="connection.protocol" @change="handleProtocolChange">
                 <el-option label="ws://" value="ws" />
                 <el-option label="wss://" value="wss" />
               </el-select>
@@ -242,11 +228,7 @@ onUnmounted(() => {
           </el-col>
           <el-col :span="8">
             <el-form-item prop="port" label="端口">
-              <el-input
-                v-model.number="connection.port"
-                type="number"
-                placeholder="8083/8084"
-              />
+              <el-input v-model.number="connection.port" type="number" placeholder="8083/8084" />
             </el-form-item>
           </el-col>
           <el-col :span="8">
@@ -293,24 +275,13 @@ onUnmounted(() => {
         <el-row :gutter="20" :align="'middle'">
           <el-col :span="8">
             <el-form-item prop="topic" label="主题">
-              <el-input
-                v-model="subscription.topic"
-                :disabled="subscribedSuccess"
-              />
+              <el-input v-model="subscription.topic" :disabled="subscribedSuccess" />
             </el-form-item>
           </el-col>
           <el-col :span="8">
             <el-form-item prop="qos" label="通信质量">
-              <el-select
-                v-model="subscription.qos"
-                :disabled="subscribedSuccess"
-              >
-                <el-option
-                  v-for="qos in qosList"
-                  :key="qos"
-                  :label="qos"
-                  :value="qos"
-                />
+              <el-select v-model="subscription.qos" :disabled="subscribedSuccess">
+                <el-option v-for="qos in qosList" :key="qos" :label="qos" :value="qos" />
               </el-select>
             </el-form-item>
           </el-col>
@@ -363,12 +334,7 @@ onUnmounted(() => {
           <el-col :span="8">
             <el-form-item prop="qos" label="通信质量">
               <el-select v-model="publish.qos">
-                <el-option
-                  v-for="qos in qosList"
-                  :key="qos"
-                  :label="qos"
-                  :value="qos"
-                />
+                <el-option v-for="qos in qosList" :key="qos" :label="qos" :value="qos" />
               </el-select>
             </el-form-item>
           </el-col>
@@ -388,12 +354,7 @@ onUnmounted(() => {
     <el-card shadow="never" class="mt-4">
       <h1>接收</h1>
       <el-col :span="24">
-        <el-input
-          v-model="receivedMessages"
-          type="textarea"
-          :rows="3"
-          readonly
-        />
+        <el-input v-model="receivedMessages" type="textarea" :rows="3" readonly />
       </el-col>
     </el-card>
   </el-card>

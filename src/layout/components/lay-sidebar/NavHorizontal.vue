@@ -19,13 +19,11 @@ import Check from "~icons/ep/check";
 
 const menuRef = ref();
 const showLogo = ref(
-  storageLocal().getItem<StorageConfigs>(
-    `${responsiveStorageNameSpace()}configure`
-  )?.showLogo ?? true
+  storageLocal().getItem<StorageConfigs>(`${responsiveStorageNameSpace()}configure`)?.showLogo ??
+    true
 );
 
-const { t, route, locale, translationCh, translationEn } =
-  useTranslationLang(menuRef);
+const { t, route, locale, translationCh, translationEn } = useTranslationLang(menuRef);
 const {
   title,
   logout,
@@ -37,7 +35,7 @@ const {
   avatarsStyle,
   toAccountSettings,
   getDropdownItemStyle,
-  getDropdownItemClass
+  getDropdownItemClass,
 } = useNav();
 
 const defaultActive = computed(() =>
@@ -49,17 +47,14 @@ nextTick(() => {
 });
 
 onMounted(() => {
-  emitter.on("logoChange", key => {
+  emitter.on("logoChange", (key) => {
     showLogo.value = key;
   });
 });
 </script>
 
 <template>
-  <div
-    v-loading="usePermissionStoreHook().wholeMenus.length === 0"
-    class="horizontal-header"
-  >
+  <div v-loading="usePermissionStoreHook().wholeMenus.length === 0" class="horizontal-header">
     <div v-if="showLogo" class="horizontal-header-left" @click="backTopMenu">
       <img :src="getLogo()" alt="logo" />
       <span>{{ title }}</span>
@@ -83,9 +78,7 @@ onMounted(() => {
       <LaySearch id="header-search" />
       <!-- 国际化 -->
       <el-dropdown id="header-translation" trigger="click">
-        <div
-          class="globalization-icon navbar-bg-hover hover:[&>svg]:animate-scale-bounce"
-        >
+        <div class="globalization-icon navbar-bg-hover hover:[&>svg]:animate-scale-bounce">
           <IconifyIconOffline :icon="GlobalizationIcon" />
         </div>
         <template #dropdown>
@@ -125,18 +118,12 @@ onMounted(() => {
         </span>
         <template #dropdown>
           <el-dropdown-item @click="toAccountSettings">
-            <IconifyIconOffline
-              :icon="AccountSettingsIcon"
-              style="margin: 5px"
-            />
+            <IconifyIconOffline :icon="AccountSettingsIcon" style="margin: 5px" />
             {{ t("buttons.pureAccountSettings") }}
           </el-dropdown-item>
           <el-dropdown-menu class="logout">
             <el-dropdown-item @click="logout">
-              <IconifyIconOffline
-                :icon="LogoutCircleRLine"
-                style="margin: 5px"
-              />
+              <IconifyIconOffline :icon="LogoutCircleRLine" style="margin: 5px" />
               {{ t("buttons.pureLoginOut") }}
             </el-dropdown-item>
           </el-dropdown-menu>

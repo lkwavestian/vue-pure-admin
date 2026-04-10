@@ -11,7 +11,7 @@ import Refresh from "~icons/ep/refresh";
 import AddFill from "~icons/ri/add-circle-line";
 
 defineOptions({
-  name: "SystemMenu"
+  name: "SystemMenu",
 });
 
 const formRef = ref();
@@ -25,7 +25,7 @@ const {
   resetForm,
   openDialog,
   handleDelete,
-  handleSelectionChange
+  handleSelectionChange,
 } = useMenu();
 
 function onFullscreen() {
@@ -43,12 +43,7 @@ function onFullscreen() {
       class="search-form bg-bg_color w-full pl-8 pt-3 overflow-auto"
     >
       <el-form-item label="菜单名称：" prop="title">
-        <el-input
-          v-model="form.title"
-          placeholder="请输入菜单名称"
-          clearable
-          class="w-45!"
-        />
+        <el-input v-model="form.title" placeholder="请输入菜单名称" clearable class="w-45!" />
       </el-form-item>
       <el-form-item>
         <el-button
@@ -59,9 +54,7 @@ function onFullscreen() {
         >
           搜索
         </el-button>
-        <el-button :icon="useRenderIcon(Refresh)" @click="resetForm(formRef)">
-          重置
-        </el-button>
+        <el-button :icon="useRenderIcon(Refresh)" @click="resetForm(formRef)"> 重置 </el-button>
       </el-form-item>
     </el-form>
 
@@ -74,11 +67,7 @@ function onFullscreen() {
       @fullscreen="onFullscreen"
     >
       <template #buttons>
-        <el-button
-          type="primary"
-          :icon="useRenderIcon(AddFill)"
-          @click="openDialog()"
-        >
+        <el-button type="primary" :icon="useRenderIcon(AddFill)" @click="openDialog()">
           新增菜单
         </el-button>
       </template>
@@ -97,7 +86,7 @@ function onFullscreen() {
           :columns="dynamicColumns"
           :header-cell-style="{
             background: 'var(--el-fill-color-light)',
-            color: 'var(--el-text-color-primary)'
+            color: 'var(--el-text-color-primary)',
           }"
           @selection-change="handleSelectionChange"
         >

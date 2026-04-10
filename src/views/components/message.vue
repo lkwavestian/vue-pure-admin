@@ -6,7 +6,7 @@ import { useRenderIcon } from "@/components/ReIcon/src/hooks";
 import Check from "~icons/ep/check";
 
 defineOptions({
-  name: "Message"
+  name: "Message",
 });
 </script>
 
@@ -28,25 +28,18 @@ defineOptions({
     <h4 class="mb-4!">Element Plus 的消息提示，点击弹出提示信息</h4>
 
     <el-space wrap>
-      <el-button
-        type="info"
-        @click="message('Info类型消息', { customClass: 'el' })"
-      >
+      <el-button type="info" @click="message('Info类型消息', { customClass: 'el' })">
         Info
       </el-button>
       <el-button
         type="success"
-        @click="
-          message('Success类型消息', { customClass: 'el', type: 'success' })
-        "
+        @click="message('Success类型消息', { customClass: 'el', type: 'success' })"
       >
         Success
       </el-button>
       <el-button
         type="warning"
-        @click="
-          message('Warning类型消息', { customClass: 'el', type: 'warning' })
-        "
+        @click="message('Warning类型消息', { customClass: 'el', type: 'warning' })"
       >
         Warning
       </el-button>
@@ -56,9 +49,7 @@ defineOptions({
       >
         Error
       </el-button>
-      <el-button
-        @click="message('可关闭消息', { customClass: 'el', showClose: true })"
-      >
+      <el-button @click="message('可关闭消息', { customClass: 'el', showClose: true })">
         可关闭
       </el-button>
       <el-button
@@ -66,7 +57,7 @@ defineOptions({
           message('分组消息合并', {
             customClass: 'el',
             type: 'success',
-            grouping: true
+            grouping: true,
           })
         "
       >
@@ -76,7 +67,7 @@ defineOptions({
         @click="
           message('自定义消息图标', {
             customClass: 'el',
-            icon: useRenderIcon(Check)
+            icon: useRenderIcon(Check),
           })
         "
       >
@@ -87,8 +78,7 @@ defineOptions({
           message('3秒后关闭', {
             customClass: 'el',
             duration: 3000,
-            onClose: () =>
-              message('消息已关闭', { customClass: 'el', type: 'success' })
+            onClose: () => message('消息已关闭', { customClass: 'el', type: 'success' }),
           })
         "
       >
@@ -99,7 +89,7 @@ defineOptions({
           message(
             h('p', null, [
               h('span', null, 'Message can be '),
-              h('i', { style: 'color: teal' }, 'VNode')
+              h('i', { style: 'color: teal' }, 'VNode'),
             ]),
             { customClass: 'el' }
           )
@@ -111,7 +101,7 @@ defineOptions({
         @click="
           message('<strong>This is <i>HTML</i> string</strong>', {
             customClass: 'el',
-            dangerouslyUseHTMLString: true
+            dangerouslyUseHTMLString: true,
           })
         "
       >
@@ -122,43 +112,29 @@ defineOptions({
     <el-divider />
 
     <h4 class="mb-4!">
-      类似 Ant Design 风格的消息提示，点击弹出提示信息（基于 ElMessage
-      样式改版，不会影响 ElMessage
+      类似 Ant Design 风格的消息提示，点击弹出提示信息（基于 ElMessage 样式改版，不会影响 ElMessage
       原本样式，使用和打包大小成本极低并适配整体暗色风格）
     </h4>
 
     <el-space wrap>
       <el-button type="info" @click="message('Info类型消息')">Info</el-button>
-      <el-button
-        type="success"
-        @click="message('Success类型消息', { type: 'success' })"
-      >
+      <el-button type="success" @click="message('Success类型消息', { type: 'success' })">
         Success
       </el-button>
-      <el-button
-        type="warning"
-        @click="message('Warning类型消息', { type: 'warning' })"
-      >
+      <el-button type="warning" @click="message('Warning类型消息', { type: 'warning' })">
         Warning
       </el-button>
-      <el-button
-        type="danger"
-        @click="message('Error类型消息', { type: 'error' })"
-      >
+      <el-button type="danger" @click="message('Error类型消息', { type: 'error' })">
         Error
       </el-button>
-      <el-button @click="message('可关闭消息', { showClose: true })">
-        可关闭
-      </el-button>
-      <el-button
-        @click="message('分组消息合并', { type: 'success', grouping: true })"
-      >
+      <el-button @click="message('可关闭消息', { showClose: true })"> 可关闭 </el-button>
+      <el-button @click="message('分组消息合并', { type: 'success', grouping: true })">
         分组消息合并
       </el-button>
       <el-button
         @click="
           message('自定义消息图标', {
-            icon: hot
+            icon: hot,
           })
         "
       >
@@ -168,7 +144,7 @@ defineOptions({
         @click="
           message('3秒后关闭', {
             duration: 3000,
-            onClose: () => message('消息已关闭', { type: 'success' })
+            onClose: () => message('消息已关闭', { type: 'success' }),
           })
         "
       >
@@ -179,7 +155,7 @@ defineOptions({
           message(
             h('p', null, [
               h('span', null, 'Message can be '),
-              h('i', { style: 'color: teal' }, 'VNode')
+              h('i', { style: 'color: teal' }, 'VNode'),
             ])
           )
         "
@@ -189,7 +165,7 @@ defineOptions({
       <el-button
         @click="
           message('<strong>This is <i>HTML</i> string</strong>', {
-            dangerouslyUseHTMLString: true
+            dangerouslyUseHTMLString: true,
           })
         "
       >
@@ -199,27 +175,15 @@ defineOptions({
 
     <el-divider />
 
-    <h4 class="mb-4!">
-      控制消息出现的位置，消息可以显示在窗口的顶部(默认) 或其他位置
-    </h4>
+    <h4 class="mb-4!">控制消息出现的位置，消息可以显示在窗口的顶部(默认) 或其他位置</h4>
 
     <el-space wrap>
       <el-button @click="message('顶部中间')"> 顶部中间 </el-button>
-      <el-button @click="message('顶部左侧', { placement: 'top-left' })">
-        顶部左侧
-      </el-button>
-      <el-button @click="message('顶部右侧', { placement: 'top-right' })">
-        顶部右侧
-      </el-button>
-      <el-button @click="message('底部中间', { placement: 'bottom' })">
-        底部中间
-      </el-button>
-      <el-button @click="message('底部左侧', { placement: 'bottom-left' })">
-        底部左侧
-      </el-button>
-      <el-button @click="message('底部右侧', { placement: 'bottom-right' })">
-        底部右侧
-      </el-button>
+      <el-button @click="message('顶部左侧', { placement: 'top-left' })"> 顶部左侧 </el-button>
+      <el-button @click="message('顶部右侧', { placement: 'top-right' })"> 顶部右侧 </el-button>
+      <el-button @click="message('底部中间', { placement: 'bottom' })"> 底部中间 </el-button>
+      <el-button @click="message('底部左侧', { placement: 'bottom-left' })"> 底部左侧 </el-button>
+      <el-button @click="message('底部右侧', { placement: 'bottom-right' })"> 底部右侧 </el-button>
     </el-space>
 
     <el-divider />

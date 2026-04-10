@@ -19,7 +19,7 @@ const iconClass = computed(() => {
     "transition-colors",
     "hover:bg-[#0000000f]",
     "dark:hover:bg-[#ffffff1f]",
-    "dark:hover:text-[#ffffffd9]"
+    "dark:hover:text-[#ffffffd9]",
   ];
 });
 
@@ -47,9 +47,7 @@ onBeforeUnmount(() => {
   <div :class="{ show }">
     <div class="right-panel-background" />
     <div ref="target" class="right-panel bg-bg_color">
-      <div
-        class="flex-bc py-3 px-5 border-0 border-l border-solid border-(--pure-border-color)"
-      >
+      <div class="flex-bc py-3 px-5 border-0 border-l border-solid border-(--pure-border-color)">
         <h4 class="dark:text-white">
           {{ t("panel.pureSystemSet") }}
         </h4>
@@ -57,7 +55,7 @@ onBeforeUnmount(() => {
           v-tippy="{
             content: t('panel.pureCloseSystemSet'),
             placement: 'bottom-start',
-            zIndex: 41000
+            zIndex: 41000,
           }"
           :class="iconClass"
         >
@@ -76,14 +74,12 @@ onBeforeUnmount(() => {
         <slot />
       </el-scrollbar>
 
-      <div
-        class="flex justify-end p-3 border-0 border-l border-solid border-(--pure-border-color)"
-      >
+      <div class="flex justify-end p-3 border-0 border-l border-solid border-(--pure-border-color)">
         <el-button
           v-tippy="{
             content: t('panel.pureClearCacheAndToLogin'),
             placement: 'left-start',
-            zIndex: 41000
+            zIndex: 41000,
           }"
           type="danger"
           text

@@ -24,14 +24,14 @@ export async function getPluginsList(
     vue({
       template: {
         compilerOptions: {
-          isCustomElement: tag => tag === "deep-chat"
-        }
-      }
+          isCustomElement: (tag) => tag === "deep-chat",
+        },
+      },
     }),
     // jsx、tsx语法支持
     vueJsx(),
     VueI18nPlugin({
-      include: [pathResolve("../locales/**")]
+      include: [pathResolve("../locales/**")],
     }),
     /**
      * 在页面上按住组合键时，鼠标在页面移动即会在 DOM 上出现遮罩层并显示相关信息，点击一下将自动打开 IDE 并将光标定位到元素对应的代码位置
@@ -41,7 +41,7 @@ export async function getPluginsList(
      */
     codeInspectorPlugin({
       bundler: "vite",
-      hideConsole: true
+      hideConsole: true,
     }),
     viteBuildInfo(),
     /**
@@ -55,14 +55,14 @@ export async function getPluginsList(
       logger: false,
       include: "mock",
       infixName: false,
-      enableProd: true
+      enableProd: true,
     }),
     // svg组件化支持
     svgLoader(),
     // 自动按需加载图标
     Icons({
       compiler: "vue3",
-      scale: 1
+      scale: 1,
     }),
     VITE_CDN ? (await import("./cdn")).cdn : null,
     configCompressPlugin(VITE_COMPRESSION),
@@ -71,6 +71,6 @@ export async function getPluginsList(
     // 打包分析
     lifecycle === "report"
       ? visualizer({ open: true, brotliSize: true, filename: "report.html" })
-      : (null as any)
+      : (null as any),
   ];
 }

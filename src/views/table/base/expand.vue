@@ -8,51 +8,47 @@ const childBorder = ref(false);
 const columns: TableColumnList = [
   {
     type: "expand",
-    slot: "expand"
+    slot: "expand",
   },
   {
     label: "日期",
-    prop: "date"
+    prop: "date",
   },
   {
     label: "姓名",
-    prop: "name"
-  }
+    prop: "name",
+  },
 ];
 
 const childColumns: TableColumnList = [
   {
     label: "Name",
-    prop: "name"
+    prop: "name",
   },
   {
     label: "State",
-    prop: "state"
+    prop: "state",
   },
   {
     label: "City",
-    prop: "city"
+    prop: "city",
   },
   {
     label: "Address",
-    prop: "address"
+    prop: "address",
   },
   {
     label: "Zip",
-    prop: "zip"
-  }
+    prop: "zip",
+  },
 ];
 </script>
 
 <template>
   <div>
-    switch parent border: <el-switch v-model="parentBorder" /> switch child
-    border: <el-switch v-model="childBorder" />
-    <pure-table
-      :data="tableDataExpand"
-      :columns="columns"
-      :border="parentBorder"
-    >
+    switch parent border: <el-switch v-model="parentBorder" /> switch child border:
+    <el-switch v-model="childBorder" />
+    <pure-table :data="tableDataExpand" :columns="columns" :border="parentBorder">
       <template #expand="{ row }">
         <div class="m-4">
           <p class="mb-2">State: {{ row.state }}</p>
@@ -60,11 +56,7 @@ const childColumns: TableColumnList = [
           <p class="mb-2">Address: {{ row.address }}</p>
           <p class="mb-4">Zip: {{ row.zip }}</p>
           <h3>Family</h3>
-          <pure-table
-            :data="row.family"
-            :columns="childColumns"
-            :border="childBorder"
-          />
+          <pure-table :data="row.family" :columns="childColumns" :border="childBorder" />
         </div>
       </template>
     </pure-table>

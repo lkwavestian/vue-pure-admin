@@ -35,7 +35,7 @@ import Info from "~icons/ri/information-line";
 import Keyhole from "~icons/ri/shield-keyhole-line";
 
 defineOptions({
-  name: "Login"
+  name: "Login",
 });
 
 const imgCode = ref("");
@@ -60,18 +60,18 @@ const { locale, translationCh, translationEn } = useTranslationLang();
 const ruleForm = reactive({
   username: "admin",
   password: "admin123",
-  verifyCode: ""
+  verifyCode: "",
 });
 
 const onLogin = async (formEl: FormInstance | undefined) => {
   if (!formEl) return;
-  await formEl.validate(valid => {
+  await formEl.validate((valid) => {
     if (valid) {
       loading.value = true;
       useUserStoreHook()
         .loginByUsername({
           username: ruleForm.username,
-          password: ruleForm.password
+          password: ruleForm.password,
         })
         .then(async () => {
           // 获取后端路由
@@ -81,7 +81,7 @@ const onLogin = async (formEl: FormInstance | undefined) => {
             message(t("login.pureLoginSuccess"), { type: "success" });
           });
         })
-        .catch(_err => {
+        .catch((_err) => {
           message(t("login.pureLoginFail"), { type: "error" });
         })
         .finally(() => {
@@ -92,28 +92,20 @@ const onLogin = async (formEl: FormInstance | undefined) => {
   });
 };
 
-const immediateDebounce: any = debounce(
-  formRef => onLogin(formRef),
-  1000,
-  true
-);
+const immediateDebounce: any = debounce((formRef) => onLogin(formRef), 1000, true);
 
 useEventListener(document, "keydown", ({ code }) => {
-  if (
-    ["Enter", "NumpadEnter"].includes(code) &&
-    !disabled.value &&
-    !loading.value
-  )
+  if (["Enter", "NumpadEnter"].includes(code) && !disabled.value && !loading.value)
     immediateDebounce(ruleFormRef.value);
 });
 
-watch(imgCode, value => {
+watch(imgCode, (value) => {
   useUserStoreHook().SET_VERIFYCODE(value);
 });
-watch(checked, bool => {
+watch(checked, (bool) => {
   useUserStoreHook().SET_ISREMEMBERED(bool);
 });
-watch(loginDay, value => {
+watch(loginDay, (value) => {
   useUserStoreHook().SET_LOGINDAY(value);
 });
 </script>
@@ -142,11 +134,7 @@ watch(loginDay, value => {
               :class="['dark:text-white!', getDropdownItemClass(locale, 'zh')]"
               @click="translationCh"
             >
-              <IconifyIconOffline
-                v-show="locale === 'zh'"
-                class="check-zh"
-                :icon="Check"
-              />
+              <IconifyIconOffline v-show="locale === 'zh'" class="check-zh" :icon="Check" />
               简体中文
             </el-dropdown-item>
             <el-dropdown-item
@@ -172,9 +160,7 @@ watch(loginDay, value => {
           <avatar class="avatar" />
           <Motion>
             <h2 class="outline-hidden">
-              <TypeIt
-                :options="{ strings: [title], cursor: false, speed: 100 }"
-              />
+              <TypeIt :options="{ strings: [title], cursor: false, speed: 100 }" />
             </h2>
           </Motion>
 
@@ -191,8 +177,8 @@ watch(loginDay, value => {
                   {
                     required: true,
                     message: transformI18n($t('login.pureUsernameReg')),
-                    trigger: 'blur'
-                  }
+                    trigger: 'blur',
+                  },
                 ]"
                 prop="username"
               >
@@ -244,7 +230,7 @@ watch(loginDay, value => {
                           outline: 'none',
                           background: 'none',
                           appearance: 'none',
-                          border: 'none'
+                          border: 'none',
                         }"
                       >
                         <option value="1">1</option>
@@ -255,18 +241,14 @@ watch(loginDay, value => {
                       <IconifyIconOffline
                         v-tippy="{
                           content: t('login.pureRememberInfo'),
-                          placement: 'top'
+                          placement: 'top',
                         }"
                         :icon="Info"
                         class="ml-1"
                       />
                     </span>
                   </el-checkbox>
-                  <el-button
-                    link
-                    type="primary"
-                    @click="useUserStoreHook().SET_CURRENTPAGE(4)"
-                  >
+                  <el-button link type="primary" @click="useUserStoreHook().SET_CURRENTPAGE(4)">
                     {{ t("login.pureForget") }}
                   </el-button>
                 </div>
@@ -308,11 +290,7 @@ watch(loginDay, value => {
                 </p>
               </el-divider>
               <div class="w-full flex justify-evenly">
-                <span
-                  v-for="(item, index) in thirdParty"
-                  :key="index"
-                  :title="t(item.title)"
-                >
+                <span v-for="(item, index) in thirdParty" :key="index" :title="t(item.title)">
                   <IconifyIconOnline
                     :icon="`ri:${item.icon}-fill`"
                     width="20"
@@ -337,11 +315,7 @@ watch(loginDay, value => {
       class="w-full flex-c absolute bottom-3 text-sm text-[rgba(0,0,0,0.6)] dark:text-[rgba(220,220,242,0.8)]"
     >
       Copyright © 2020-present
-      <a
-        class="hover:text-primary!"
-        href="https://github.com/pure-admin"
-        target="_blank"
-      >
+      <a class="hover:text-primary!" href="https://github.com/pure-admin" target="_blank">
         &nbsp;{{ title }}
       </a>
     </div>

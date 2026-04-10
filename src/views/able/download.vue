@@ -3,12 +3,12 @@ import {
   downloadByOnlineUrl,
   downloadByBase64,
   downloadByData,
-  downloadByUrl
+  downloadByUrl,
 } from "@pureadmin/utils";
 import axios from "axios";
 
 defineOptions({
-  name: "Download"
+  name: "Download",
 });
 
 const base64 =
@@ -17,7 +17,7 @@ const base64 =
 function down() {
   axios
     .get("https://xiaoxian521.github.io/hyperlink/img/pure.png", {
-      responseType: "blob"
+      responseType: "blob",
     })
     .then(({ data }) => {
       downloadByData(data, "test-data.png");

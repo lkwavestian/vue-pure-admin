@@ -1,9 +1,5 @@
 <script setup lang="ts">
-import {
-  deleteChildren,
-  getNodeByUniqueId,
-  appendFieldByUniqueId
-} from "@/utils/tree";
+import { deleteChildren, getNodeByUniqueId, appendFieldByUniqueId } from "@/utils/tree";
 import { useI18n } from "vue-i18n";
 import { useDetail } from "./hooks";
 import { ref, computed } from "vue";
@@ -13,7 +9,7 @@ import { useMultiTagsStoreHook } from "@/store/modules/multiTags";
 import { usePermissionStoreHook } from "@/store/modules/permission";
 
 defineOptions({
-  name: "Tabs"
+  name: "Tabs",
 });
 
 const { locale } = useI18n();
@@ -22,7 +18,7 @@ const menusTree = clone(usePermissionStoreHook().wholeMenus, true);
 
 const treeData = computed(() => {
   return appendFieldByUniqueId(deleteChildren(menusTree), 0, {
-    disabled: true
+    disabled: true,
   });
 });
 
@@ -35,19 +31,19 @@ const multiTags = computed(() => {
 const treeSelectProps = {
   label: (data: any) => transformI18n(data.meta.title),
   children: "children",
-  disabled: "disabled"
+  disabled: "disabled",
 };
 
 function onCloseTags() {
   if (currentValues.value.length === 0) return;
-  currentValues.value.forEach(uniqueId => {
+  currentValues.value.forEach((uniqueId) => {
     const currentPath =
       getNodeByUniqueId(treeData.value, uniqueId).redirect ??
       getNodeByUniqueId(treeData.value, uniqueId).path;
     useMultiTagsStoreHook().handleTags("splice", currentPath);
     if (currentPath === "/tabs/index")
       router.push({
-        path: multiTags.value[(multiTags as any).value.length - 1].path
+        path: multiTags.value[(multiTags as any).value.length - 1].path,
       });
   });
 }
@@ -75,11 +71,7 @@ function onCloseTags() {
       >
         打开{{ index }}详情页
       </el-button>
-      <el-button
-        @click="
-          toDetail({ id: 666, name: '小明', age: 18, job: '工程师' }, 'query')
-        "
-      >
+      <el-button @click="toDetail({ id: 666, name: '小明', age: 18, job: '工程师' }, 'query')">
         多个参数
       </el-button>
     </div>
@@ -125,9 +117,7 @@ function onCloseTags() {
     <el-button @click="router.push('/nested/menu1/menu1-2/menu1-2-2')">
       跳转页内菜单（直接传要跳转的路径）
     </el-button>
-    <el-button
-      @click="router.push({ path: '/nested/menu1/menu1-2/menu1-2-2' })"
-    >
+    <el-button @click="router.push({ path: '/nested/menu1/menu1-2/menu1-2-2' })">
       跳转页内菜单（传path对象）
     </el-button>
 
@@ -136,7 +126,7 @@ function onCloseTags() {
       @click="
         router.push({
           name: 'Menu1-2-2',
-          query: { text: '传name对象，优先推荐' }
+          query: { text: '传name对象，优先推荐' },
         })
       "
     >
@@ -146,7 +136,7 @@ function onCloseTags() {
       @click="
         router.push({
           path: '/nested/menu1/menu1-2/menu1-2-2',
-          query: { text: '传path对象' }
+          query: { text: '传path对象' },
         })
       "
     >
@@ -161,8 +151,6 @@ function onCloseTags() {
     </el-link>
 
     <el-divider />
-    <el-button @click="router.push({ name: 'Empty' })">
-      跳转无Layout的空白页面
-    </el-button>
+    <el-button @click="router.push({ name: 'Empty' })"> 跳转无Layout的空白页面 </el-button>
   </el-card>
 </template>

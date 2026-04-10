@@ -5,7 +5,7 @@ import {
   reactive,
   onMounted,
   type CSSProperties,
-  getCurrentInstance
+  getCurrentInstance,
 } from "vue";
 import type { tagsViewsType } from "../types";
 import { useRoute, useRouter } from "vue-router";
@@ -13,13 +13,7 @@ import { transformI18n, $t } from "@/plugins/i18n";
 import { responsiveStorageNameSpace } from "@/config";
 import { useSettingStoreHook } from "@/store/modules/settings";
 import { useMultiTagsStoreHook } from "@/store/modules/multiTags";
-import {
-  isEqual,
-  isBoolean,
-  storageLocal,
-  toggleClass,
-  hasClass
-} from "@pureadmin/utils";
+import { isEqual, isBoolean, storageLocal, toggleClass, hasClass } from "@pureadmin/utils";
 
 import Fullscreen from "~icons/ri/fullscreen-fill";
 import CloseAllTags from "~icons/ri/subtract-line";
@@ -46,16 +40,13 @@ export function useTags() {
 
   /** 页签风格默认为谷歌风格 */
   const tagsStyle = ref(
-    storageLocal().getItem<StorageConfigs>(
-      `${responsiveStorageNameSpace()}configure`
-    )?.tagsStyle || "chrome"
+    storageLocal().getItem<StorageConfigs>(`${responsiveStorageNameSpace()}configure`)?.tagsStyle ||
+      "chrome"
   );
   /** 是否隐藏标签页，默认显示 */
   const showTags =
     ref(
-      storageLocal().getItem<StorageConfigs>(
-        `${responsiveStorageNameSpace()}configure`
-      ).hideTabs
+      storageLocal().getItem<StorageConfigs>(`${responsiveStorageNameSpace()}configure`).hideTabs
     ) ?? ref("false");
   const multiTags: any = computed(() => {
     return useMultiTagsStoreHook().multiTags;
@@ -67,50 +58,50 @@ export function useTags() {
       text: $t("buttons.pureReload"),
       divided: false,
       disabled: false,
-      show: true
+      show: true,
     },
     {
       icon: Close,
       text: $t("buttons.pureCloseCurrentTab"),
       divided: false,
       disabled: multiTags.value.length > 1 ? false : true,
-      show: true
+      show: true,
     },
     {
       icon: CloseLeftTags,
       text: $t("buttons.pureCloseLeftTabs"),
       divided: true,
       disabled: multiTags.value.length > 1 ? false : true,
-      show: true
+      show: true,
     },
     {
       icon: CloseRightTags,
       text: $t("buttons.pureCloseRightTabs"),
       divided: false,
       disabled: multiTags.value.length > 1 ? false : true,
-      show: true
+      show: true,
     },
     {
       icon: CloseOtherTags,
       text: $t("buttons.pureCloseOtherTabs"),
       divided: true,
       disabled: multiTags.value.length > 2 ? false : true,
-      show: true
+      show: true,
     },
     {
       icon: CloseAllTags,
       text: $t("buttons.pureCloseAllTabs"),
       divided: false,
       disabled: multiTags.value.length > 1 ? false : true,
-      show: true
+      show: true,
     },
     {
       icon: Fullscreen,
       text: $t("buttons.pureContentFullScreen"),
       divided: true,
       disabled: false,
-      show: true
-    }
+      show: true,
+    },
   ]);
 
   function conditionHandle(item, previous, next) {
@@ -119,13 +110,9 @@ export function useTags() {
 
     if (isBoolean(route?.meta?.showLink) && route?.meta?.showLink === false) {
       if (Object.keys(route.query).length > 0) {
-        return currentName === itemName && isEqual(route.query, item.query)
-          ? previous
-          : next;
+        return currentName === itemName && isEqual(route.query, item.query) ? previous : next;
       } else {
-        return currentName === itemName && isEqual(route.params, item.params)
-          ? previous
-          : next;
+        return currentName === itemName && isEqual(route.params, item.params) ? previous : next;
       }
     } else {
       return currentName === itemName ? previous : next;
@@ -133,7 +120,7 @@ export function useTags() {
   }
 
   const isFixedTag = computed(() => {
-    return item => {
+    return (item) => {
       return isBoolean(item?.meta?.fixedTag) && item?.meta?.fixedTag === true;
     };
   });
@@ -146,13 +133,13 @@ export function useTags() {
   });
 
   const linkIsActive = computed(() => {
-    return item => {
+    return (item) => {
       return conditionHandle(item, "is-active", "");
     };
   });
 
   const scheduleIsActive = computed(() => {
-    return item => {
+    return (item) => {
       return conditionHandle(item, "schedule-active", "");
     };
   });
@@ -160,7 +147,7 @@ export function useTags() {
   const getTabStyle = computed((): CSSProperties => {
     return {
       transform: `translateX(${translateX.value}px)`,
-      transition: isScrolling.value ? "none" : "transform 0.5s ease-in-out"
+      transition: isScrolling.value ? "none" : "transform 0.5s ease-in-out",
     };
   });
 
@@ -176,8 +163,7 @@ export function useTags() {
   function onMouseenter(index) {
     if (index) activeIndex.value = index;
     if (unref(tagsStyle) === "smart") {
-      if (hasClass(instance.refs["schedule" + index][0], "schedule-active"))
-        return;
+      if (hasClass(instance.refs["schedule" + index][0], "schedule-active")) return;
       toggleClass(true, "schedule-in", instance.refs["schedule" + index][0]);
       toggleClass(false, "schedule-out", instance.refs["schedule" + index][0]);
     } else {
@@ -191,8 +177,7 @@ export function useTags() {
   function onMouseleave(index) {
     activeIndex.value = -1;
     if (unref(tagsStyle) === "smart") {
-      if (hasClass(instance.refs["schedule" + index][0], "schedule-active"))
-        return;
+      if (hasClass(instance.refs["schedule" + index][0], "schedule-active")) return;
       toggleClass(false, "schedule-in", instance.refs["schedule" + index][0]);
       toggleClass(true, "schedule-out", instance.refs["schedule" + index][0]);
     } else {
@@ -214,10 +199,7 @@ export function useTags() {
         `${responsiveStorageNameSpace()}configure`
       );
       configure.tagsStyle = "card";
-      storageLocal().setItem(
-        `${responsiveStorageNameSpace()}configure`,
-        configure
-      );
+      storageLocal().setItem(`${responsiveStorageNameSpace()}configure`, configure);
     }
   });
 
@@ -250,6 +232,6 @@ export function useTags() {
     onMouseenter,
     onMouseleave,
     transformI18n,
-    onContentFullScreen
+    onContentFullScreen,
   };
 }

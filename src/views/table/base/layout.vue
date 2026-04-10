@@ -9,16 +9,16 @@ const tableLayout = ref<TableLayout>("fixed");
 const columns: TableColumnList = [
   {
     label: "日期",
-    prop: "date"
+    prop: "date",
   },
   {
     label: "姓名",
-    prop: "name"
+    prop: "name",
   },
   {
     label: "地址",
-    prop: "address"
-  }
+    prop: "address",
+  },
 ];
 </script>
 
@@ -29,10 +29,6 @@ const columns: TableColumnList = [
       <el-radio-button label="auto" value="auto" />
     </el-radio-group>
 
-    <pure-table
-      :data="tableData"
-      :columns="columns"
-      :table-layout="tableLayout"
-    />
+    <pure-table :data="tableData" :columns="columns" :table-layout="tableLayout" />
   </div>
 </template>

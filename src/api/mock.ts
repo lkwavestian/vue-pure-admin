@@ -12,15 +12,15 @@ export const mapJson = (params?: object) => {
 };
 
 /** 文件上传 */
-export const formUpload = data => {
+export const formUpload = (data) => {
   return http.request<Result>(
     "post",
     "https://pureadmin.free.beeceptor.com/images",
     { data },
     {
       headers: {
-        "Content-Type": "multipart/form-data"
-      }
+        "Content-Type": "multipart/form-data",
+      },
     }
   );
 };

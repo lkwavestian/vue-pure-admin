@@ -19,7 +19,7 @@ interface Tree {
 
 defineProps({
   treeLoading: Boolean,
-  treeData: Array
+  treeData: Array,
 });
 
 const emit = defineEmits(["tree-select"]);
@@ -31,7 +31,7 @@ const highlightMap = ref({});
 const { proxy } = getCurrentInstance();
 const defaultProps = {
   children: "children",
-  label: "name"
+  label: "name",
 };
 const buttonClass = computed(() => {
   return [
@@ -40,7 +40,7 @@ const buttonClass = computed(() => {
     "reset-margin",
     "text-(--el-text-color-regular)!",
     "dark:text-white!",
-    "dark:hover:text-primary!"
+    "dark:hover:text-primary!",
   ];
 });
 
@@ -53,10 +53,10 @@ function nodeClick(value) {
   const nodeId = value.$treeNodeId;
   highlightMap.value[nodeId] = highlightMap.value[nodeId]?.highlight
     ? Object.assign({ id: nodeId }, highlightMap.value[nodeId], {
-        highlight: false
+        highlight: false,
       })
     : Object.assign({ id: nodeId }, highlightMap.value[nodeId], {
-        highlight: true
+        highlight: true,
       });
   Object.values(highlightMap.value).forEach((v: Tree) => {
     if (v.id !== nodeId) {
@@ -86,7 +86,7 @@ function onTreeReset() {
   toggleRowExpansionAll(true);
 }
 
-watch(searchValue, val => {
+watch(searchValue, (val) => {
   treeRef.value!.filter(val);
 });
 
@@ -109,10 +109,7 @@ defineExpose({ onTreeReset });
       >
         <template #suffix>
           <el-icon class="el-input__icon">
-            <IconifyIconOffline
-              v-show="searchValue.length === 0"
-              icon="ri/search-line"
-            />
+            <IconifyIconOffline v-show="searchValue.length === 0" icon="ri/search-line" />
           </el-icon>
         </template>
       </el-input>
@@ -167,28 +164,18 @@ defineExpose({ onTreeReset });
               'items-center',
               'select-none',
               'hover:text-primary',
-              searchValue.trim().length > 0 &&
-                node.label.includes(searchValue) &&
-                'text-red-500',
-              highlightMap[node.id]?.highlight ? 'dark:text-primary' : ''
+              searchValue.trim().length > 0 && node.label.includes(searchValue) && 'text-red-500',
+              highlightMap[node.id]?.highlight ? 'dark:text-primary' : '',
             ]"
             :style="{
-              color: highlightMap[node.id]?.highlight
-                ? 'var(--el-color-primary)'
-                : '',
+              color: highlightMap[node.id]?.highlight ? 'var(--el-color-primary)' : '',
               background: highlightMap[node.id]?.highlight
                 ? 'var(--el-color-primary-light-7)'
-                : 'transparent'
+                : 'transparent',
             }"
           >
             <IconifyIconOffline
-              :icon="
-                data.type === 1
-                  ? OfficeBuilding
-                  : data.type === 2
-                    ? LocationCompany
-                    : Dept
-              "
+              :icon="data.type === 1 ? OfficeBuilding : data.type === 2 ? LocationCompany : Dept"
             />
             <span class="w-30! truncate!" :title="node.label">
               {{ node.label }}

@@ -1,0 +1,16 @@
+node_modules/
+src/assets/
+dist/
+dist-ssr/
+tests/**/coverage/
+.idea/
+.DS_Store
+.eslintcache
+report.html
+vite.config.*.timestamp*
+*.local
+yarn.lock
+npm-debug.log*
+.pnpm-error.log*
+.pnpm-debug.log
+tsconfig.tsbuildinfo

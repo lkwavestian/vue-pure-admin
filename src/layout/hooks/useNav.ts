@@ -17,8 +17,7 @@ import { usePermissionStoreHook } from "@/store/modules/permission";
 import ExitFullscreen from "~icons/ri/fullscreen-exit-fill";
 import Fullscreen from "~icons/ri/fullscreen-fill";
 
-const errorInfo =
-  "The current routing configuration is incorrect, please check the configuration";
+const errorInfo = "The current routing configuration is incorrect, please check the configuration";
 
 export function useNav() {
   const pureApp = useAppStoreHook();
@@ -34,15 +33,13 @@ export function useNav() {
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
-      overflow: "hidden"
+      overflow: "hidden",
     };
   });
 
   /** 头像（如果头像为空则使用 src/assets/user.jpg ） */
   const userAvatar = computed(() => {
-    return isAllEmpty(useUserStoreHook()?.avatar)
-      ? Avatar
-      : useUserStoreHook()?.avatar;
+    return isAllEmpty(useUserStoreHook()?.avatar) ? Avatar : useUserStoreHook()?.avatar;
   });
 
   /** 昵称（如果昵称为空则显示用户名） */
@@ -57,7 +54,7 @@ export function useNav() {
     return (locale, t) => {
       return {
         background: locale === t ? useEpThemeStoreHook().epThemeColor : "",
-        color: locale === t ? "#f4f4f5" : "#000"
+        color: locale === t ? "#f4f4f5" : "#000",
       };
     };
   });
@@ -175,6 +172,6 @@ export function useNav() {
     tooltipEffect,
     toAccountSettings,
     getDropdownItemStyle,
-    getDropdownItemClass
+    getDropdownItemClass,
   };
 }

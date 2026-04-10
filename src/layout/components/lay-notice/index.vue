@@ -13,21 +13,16 @@ const notices = ref(noticesData);
 const activeKey = ref(noticesData[0]?.key);
 
 const getLabel = computed(
-  () => item =>
-    t(item.name) + (item.list.length > 0 ? `(${item.list.length})` : "")
+  () => (item) => t(item.name) + (item.list.length > 0 ? `(${item.list.length})` : "")
 );
 
 const currentNoticeHasData = computed(() => {
-  const currentNotice = notices.value.find(
-    item => item.key === activeKey.value
-  );
+  const currentNotice = notices.value.find((item) => item.key === activeKey.value);
   return currentNotice && currentNotice.list.length > 0;
 });
 
 const hasAnyNoticeData = computed(() => {
-  return notices.value.some(
-    item => Array.isArray(item.list) && item.list.length > 0
-  );
+  return notices.value.some((item) => Array.isArray(item.list) && item.list.length > 0);
 });
 
 const onWatchMore = () => {
@@ -35,9 +30,7 @@ const onWatchMore = () => {
 };
 
 const onMarkAsRead = () => {
-  const currentNotice = notices.value.find(
-    item => item.key === activeKey.value
-  );
+  const currentNotice = notices.value.find((item) => item.key === activeKey.value);
   if (currentNotice) {
     currentNotice.list = [];
   }
@@ -46,9 +39,7 @@ const onMarkAsRead = () => {
 
 <template>
   <el-dropdown ref="dropdownRef" trigger="click" placement="bottom-end">
-    <span
-      :class="['dropdown-badge', 'navbar-bg-hover', 'select-none', 'mr-1.75']"
-    >
+    <span :class="['dropdown-badge', 'navbar-bg-hover', 'select-none', 'mr-1.75']">
       <el-badge is-dot :hidden="!hasAnyNoticeData">
         <span class="header-notice-icon">
           <IconifyIconOffline :icon="BellIcon" />

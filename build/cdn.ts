@@ -12,38 +12,38 @@ export const cdn = importToCDN({
     {
       name: "vue",
       var: "Vue",
-      path: "vue.global.prod.min.js"
+      path: "vue.global.prod.min.js",
     },
     {
       name: "vue-router",
       var: "VueRouter",
-      path: "vue-router.global.min.js"
+      path: "vue-router.global.min.js",
     },
     {
       name: "vue-i18n",
       var: "VueI18n",
-      path: "vue-i18n.runtime.global.prod.min.js"
+      path: "vue-i18n.runtime.global.prod.min.js",
     },
     {
       name: "element-plus",
       var: "ElementPlus",
       path: "index.full.min.js",
-      css: "index.min.css"
+      css: "index.min.css",
     },
     {
       name: "axios",
       var: "axios",
-      path: "axios.min.js"
+      path: "axios.min.js",
     },
     {
       name: "dayjs",
       var: "dayjs",
-      path: "dayjs.min.js"
+      path: "dayjs.min.js",
     },
     {
       name: "echarts",
       var: "echarts",
-      path: "echarts.min.js"
-    }
-  ]
+      path: "echarts.min.js",
+    },
+  ],
 });

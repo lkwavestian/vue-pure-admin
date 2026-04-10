@@ -3,12 +3,7 @@ import { useRole } from "./utils/hook";
 import { ref, computed, nextTick, onMounted } from "vue";
 import { PureTableBar } from "@/components/RePureTableBar";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";
-import {
-  delay,
-  subBefore,
-  deviceDetection,
-  useResizeObserver
-} from "@pureadmin/utils";
+import { delay, subBefore, deviceDetection, useResizeObserver } from "@pureadmin/utils";
 
 // import Database from "~icons/ri/database-2-line";
 // import More from "~icons/ep/more-filled";
@@ -21,7 +16,7 @@ import Close from "~icons/ep/close";
 import Check from "~icons/ep/check";
 
 defineOptions({
-  name: "SystemRole"
+  name: "SystemRole",
 });
 
 const iconClass = computed(() => {
@@ -34,7 +29,7 @@ const iconClass = computed(() => {
     "transition-colors",
     "hover:bg-[#0000000f]",
     "dark:hover:bg-[#ffffff1f]",
-    "dark:hover:text-[#ffffffd9]"
+    "dark:hover:text-[#ffffffd9]",
   ];
 });
 
@@ -72,7 +67,7 @@ const {
   // handleDatabase,
   handleSizeChange,
   handleCurrentChange,
-  handleSelectionChange
+  handleSelectionChange,
 } = useRole(treeRef);
 
 onMounted(() => {
@@ -96,28 +91,13 @@ onMounted(() => {
       class="search-form bg-bg_color w-full pl-8 pt-3 overflow-auto"
     >
       <el-form-item label="角色名称：" prop="name">
-        <el-input
-          v-model="form.name"
-          placeholder="请输入角色名称"
-          clearable
-          class="w-45!"
-        />
+        <el-input v-model="form.name" placeholder="请输入角色名称" clearable class="w-45!" />
       </el-form-item>
       <el-form-item label="角色标识：" prop="code">
-        <el-input
-          v-model="form.code"
-          placeholder="请输入角色标识"
-          clearable
-          class="w-45!"
-        />
+        <el-input v-model="form.code" placeholder="请输入角色标识" clearable class="w-45!" />
       </el-form-item>
       <el-form-item label="状态：" prop="status">
-        <el-select
-          v-model="form.status"
-          placeholder="请选择状态"
-          clearable
-          class="w-45!"
-        >
+        <el-select v-model="form.status" placeholder="请选择状态" clearable class="w-45!">
           <el-option label="已启用" value="1" />
           <el-option label="已停用" value="0" />
         </el-select>
@@ -131,16 +111,11 @@ onMounted(() => {
         >
           搜索
         </el-button>
-        <el-button :icon="useRenderIcon(Refresh)" @click="resetForm(formRef)">
-          重置
-        </el-button>
+        <el-button :icon="useRenderIcon(Refresh)" @click="resetForm(formRef)"> 重置 </el-button>
       </el-form-item>
     </el-form>
 
-    <div
-      ref="contentRef"
-      :class="['flex', deviceDetection() ? 'flex-wrap' : '']"
-    >
+    <div ref="contentRef" :class="['flex', deviceDetection() ? 'flex-wrap' : '']">
       <PureTableBar
         :class="[isShow && !deviceDetection() ? 'w-[60vw]!' : 'w-full']"
         style="transition: width 220ms cubic-bezier(0.4, 0, 0.2, 1)"
@@ -149,11 +124,7 @@ onMounted(() => {
         @refresh="onSearch"
       >
         <template #buttons>
-          <el-button
-            type="primary"
-            :icon="useRenderIcon(AddFill)"
-            @click="openDialog()"
-          >
+          <el-button type="primary" :icon="useRenderIcon(AddFill)" @click="openDialog()">
             新增角色
           </el-button>
         </template>
@@ -173,7 +144,7 @@ onMounted(() => {
             :pagination="{ ...pagination, size }"
             :header-cell-style="{
               background: 'var(--el-fill-color-light)',
-              color: 'var(--el-text-color-primary)'
+              color: 'var(--el-text-color-primary)',
             }"
             @selection-change="handleSelectionChange"
             @page-size-change="handleSizeChange"
@@ -267,7 +238,7 @@ onMounted(() => {
             <span :class="iconClass">
               <IconifyIconOffline
                 v-tippy="{
-                  content: '关闭'
+                  content: '关闭',
                 }"
                 class="dark:text-white"
                 width="18px"
@@ -279,7 +250,7 @@ onMounted(() => {
             <span :class="[iconClass, 'ml-2']">
               <IconifyIconOffline
                 v-tippy="{
-                  content: '保存菜单权限'
+                  content: '保存菜单权限',
                 }"
                 class="dark:text-white"
                 width="18px"

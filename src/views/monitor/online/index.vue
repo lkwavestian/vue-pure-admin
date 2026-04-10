@@ -8,7 +8,7 @@ import Plane from "~icons/ri/plane-line";
 import Refresh from "~icons/ep/refresh";
 
 defineOptions({
-  name: "OnlineUser"
+  name: "OnlineUser",
 });
 
 const formRef = ref();
@@ -23,7 +23,7 @@ const {
   handleOffline,
   handleSizeChange,
   handleCurrentChange,
-  handleSelectionChange
+  handleSelectionChange,
 } = useRole();
 </script>
 
@@ -36,12 +36,7 @@ const {
       class="search-form bg-bg_color w-full pl-8 pt-3 overflow-auto"
     >
       <el-form-item label="用户名" prop="username">
-        <el-input
-          v-model="form.username"
-          placeholder="请输入用户名"
-          clearable
-          class="w-45!"
-        />
+        <el-input v-model="form.username" placeholder="请输入用户名" clearable class="w-45!" />
       </el-form-item>
       <el-form-item>
         <el-button
@@ -52,17 +47,11 @@ const {
         >
           搜索
         </el-button>
-        <el-button :icon="useRenderIcon(Refresh)" @click="resetForm(formRef)">
-          重置
-        </el-button>
+        <el-button :icon="useRenderIcon(Refresh)" @click="resetForm(formRef)"> 重置 </el-button>
       </el-form-item>
     </el-form>
 
-    <PureTableBar
-      title="在线用户（仅演示，操作后不生效）"
-      :columns="columns"
-      @refresh="onSearch"
-    >
+    <PureTableBar title="在线用户（仅演示，操作后不生效）" :columns="columns" @refresh="onSearch">
       <template v-slot="{ size, dynamicColumns }">
         <pure-table
           align-whole="center"
@@ -77,17 +66,14 @@ const {
           :pagination="{ ...pagination, size }"
           :header-cell-style="{
             background: 'var(--el-fill-color-light)',
-            color: 'var(--el-text-color-primary)'
+            color: 'var(--el-text-color-primary)',
           }"
           @selection-change="handleSelectionChange"
           @page-size-change="handleSizeChange"
           @page-current-change="handleCurrentChange"
         >
           <template #operation="{ row }">
-            <el-popconfirm
-              :title="`是否强制下线${row.username}`"
-              @confirm="handleOffline(row)"
-            >
+            <el-popconfirm :title="`是否强制下线${row.username}`" @confirm="handleOffline(row)">
               <template #reference>
                 <el-button
                   class="reset-margin"

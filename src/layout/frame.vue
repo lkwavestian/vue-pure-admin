@@ -4,7 +4,7 @@ import { useRoute } from "vue-router";
 import { ref, unref, watch, onMounted, nextTick } from "vue";
 
 defineOptions({
-  name: "LayFrame"
+  name: "LayFrame",
 });
 
 const props = defineProps<{
@@ -54,7 +54,7 @@ let isRedirect = false;
 
 watch(
   () => currentRoute.fullPath,
-  path => {
+  (path) => {
     if (
       currentRoute.name === "Redirect" &&
       props.frameInfo?.fullPath &&
@@ -87,11 +87,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div
-    v-loading="loading"
-    class="frame"
-    :element-loading-text="t('status.pureLoad')"
-  >
+  <div v-loading="loading" class="frame" :element-loading-text="t('status.pureLoad')">
     <iframe ref="frameRef" :src="frameSrc" class="frame-iframe" />
   </div>
 </template>

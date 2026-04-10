@@ -10,7 +10,7 @@ import Refresh from "~icons/ep/refresh";
 import AddFill from "~icons/ri/add-circle-line";
 
 defineOptions({
-  name: "SystemDept"
+  name: "SystemDept",
 });
 
 const formRef = ref();
@@ -24,7 +24,7 @@ const {
   resetForm,
   openDialog,
   handleDelete,
-  handleSelectionChange
+  handleSelectionChange,
 } = useDept();
 
 function onFullscreen() {
@@ -42,20 +42,10 @@ function onFullscreen() {
       class="search-form bg-bg_color w-full pl-8 pt-3 overflow-auto"
     >
       <el-form-item label="部门名称：" prop="name">
-        <el-input
-          v-model="form.name"
-          placeholder="请输入部门名称"
-          clearable
-          class="w-45!"
-        />
+        <el-input v-model="form.name" placeholder="请输入部门名称" clearable class="w-45!" />
       </el-form-item>
       <el-form-item label="状态：" prop="status">
-        <el-select
-          v-model="form.status"
-          placeholder="请选择状态"
-          clearable
-          class="w-45!"
-        >
+        <el-select v-model="form.status" placeholder="请选择状态" clearable class="w-45!">
           <el-option label="启用" :value="1" />
           <el-option label="停用" :value="0" />
         </el-select>
@@ -69,9 +59,7 @@ function onFullscreen() {
         >
           搜索
         </el-button>
-        <el-button :icon="useRenderIcon(Refresh)" @click="resetForm(formRef)">
-          重置
-        </el-button>
+        <el-button :icon="useRenderIcon(Refresh)" @click="resetForm(formRef)"> 重置 </el-button>
       </el-form-item>
     </el-form>
 
@@ -83,11 +71,7 @@ function onFullscreen() {
       @fullscreen="onFullscreen"
     >
       <template #buttons>
-        <el-button
-          type="primary"
-          :icon="useRenderIcon(AddFill)"
-          @click="openDialog()"
-        >
+        <el-button type="primary" :icon="useRenderIcon(AddFill)" @click="openDialog()">
           新增部门
         </el-button>
       </template>
@@ -107,7 +91,7 @@ function onFullscreen() {
           :columns="dynamicColumns"
           :header-cell-style="{
             background: 'var(--el-fill-color-light)',
-            color: 'var(--el-text-color-primary)'
+            color: 'var(--el-text-color-primary)',
           }"
           @selection-change="handleSelectionChange"
         >

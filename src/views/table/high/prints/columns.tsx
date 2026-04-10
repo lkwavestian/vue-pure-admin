@@ -9,20 +9,20 @@ export function useColumns(printRef: Ref) {
   const columns: TableColumnList = [
     {
       label: "ID",
-      prop: "id"
+      prop: "id",
     },
     {
       label: "日期",
-      prop: "date"
+      prop: "date",
     },
     {
       label: "姓名",
-      prop: "name"
+      prop: "name",
     },
     {
       label: "地址",
-      prop: "address"
-    }
+      prop: "address",
+    },
   ];
 
   const print = () => {
@@ -31,22 +31,16 @@ export function useColumns(printRef: Ref) {
 
   function cellStyle({ column: { property }, rowIndex }) {
     if (property === "id") {
-      return rowIndex < 3
-        ? { background: "#87baf9" }
-        : { background: "#87e8de" };
+      return rowIndex < 3 ? { background: "#87baf9" } : { background: "#87e8de" };
     }
   }
 
   function headerCellStyle({ columnIndex }) {
-    return columnIndex === 0
-      ? { background: "#f3b2d0" }
-      : { background: "#fafafa" };
+    return columnIndex === 0 ? { background: "#f3b2d0" } : { background: "#fafafa" };
   }
 
   function rowStyle({ rowIndex }) {
-    return rowIndex % 2 === 1
-      ? { background: "#ffa39e" }
-      : { background: "#91d5ff" };
+    return rowIndex % 2 === 1 ? { background: "#ffa39e" } : { background: "#91d5ff" };
   }
 
   return {
@@ -55,6 +49,6 @@ export function useColumns(printRef: Ref) {
     print,
     rowStyle,
     cellStyle,
-    headerCellStyle
+    headerCellStyle,
   };
 }

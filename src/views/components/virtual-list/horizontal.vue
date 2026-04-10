@@ -7,14 +7,14 @@ const search = ref("");
 
 for (let i = 0; i < 800; i++) {
   items.value.push({
-    id: i
+    id: i,
   });
 }
 
 const filteredItems = computed(() => {
   if (!search.value) return items.value;
   const lowerCaseSearch = search.value;
-  return items.value.filter(i => i.id == lowerCaseSearch);
+  return items.value.filter((i) => i.id == lowerCaseSearch);
 });
 </script>
 
@@ -37,17 +37,7 @@ const filteredItems = computed(() => {
       direction="horizontal"
       class="scroller"
     >
-      <template
-        #default="{
-          item,
-          index,
-          active
-        }: {
-          item: any;
-          index: number;
-          active: boolean;
-        }"
-      >
+      <template #default="{ item, index, active }: { item: any; index: number; active: boolean }">
         <DynamicScrollerItem
           :item="item"
           :active="active"
@@ -56,15 +46,12 @@ const filteredItems = computed(() => {
           :data-active="active"
           :title="`Click to change message ${index}`"
           :style="{
-            width: `${Math.max(130, Math.round((item.id?.length / 20) * 20))}px`
+            width: `${Math.max(130, Math.round((item.id?.length / 20) * 20))}px`,
           }"
           class="message"
         >
           <div>
-            <IconifyIconOnline
-              icon="openmoji:beaming-face-with-smiling-eyes"
-              width="40"
-            />
+            <IconifyIconOnline icon="openmoji:beaming-face-with-smiling-eyes" width="40" />
             <p class="text-center">{{ item.id }}</p>
           </div>
         </DynamicScrollerItem>

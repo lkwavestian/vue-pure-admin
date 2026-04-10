@@ -10,7 +10,7 @@ import Segmented, { type OptionsType } from "@/components/ReSegmented";
 import { chartData, barChartData, progressData, latestNewsData } from "./data";
 
 defineOptions({
-  name: "Welcome"
+  name: "Welcome",
 });
 
 const { isDark } = useDark();
@@ -18,11 +18,11 @@ const { isDark } = useDark();
 let curWeek = ref(1); // 0上周、1本周
 const optionsBasis: Array<OptionsType> = [
   {
-    label: "上周"
+    label: "上周",
   },
   {
-    label: "本周"
-  }
+    label: "本周",
+  },
 ];
 </script>
 
@@ -40,14 +40,14 @@ const optionsBasis: Array<OptionsType> = [
         :xs="24"
         :initial="{
           opacity: 0,
-          y: 100
+          y: 100,
         }"
         :enter="{
           opacity: 1,
           y: 0,
           transition: {
-            delay: 80 * (index + 1)
-          }
+            delay: 80 * (index + 1),
+          },
         }"
       >
         <el-card class="line-card" shadow="never">
@@ -58,15 +58,10 @@ const optionsBasis: Array<OptionsType> = [
             <div
               class="size-8 flex-c rounded-md"
               :style="{
-                backgroundColor: isDark ? 'transparent' : item.bgColor
+                backgroundColor: isDark ? 'transparent' : item.bgColor,
               }"
             >
-              <IconifyIconOffline
-                :icon="item.icon"
-                :color="item.color"
-                width="18"
-                height="18"
-              />
+              <IconifyIconOffline :icon="item.icon" :color="item.color" width="18" height="18" />
             </div>
           </div>
           <div class="flex justify-between items-start mt-3">
@@ -97,14 +92,14 @@ const optionsBasis: Array<OptionsType> = [
         :xs="24"
         :initial="{
           opacity: 0,
-          y: 100
+          y: 100,
         }"
         :enter="{
           opacity: 1,
           y: 0,
           transition: {
-            delay: 400
-          }
+            delay: 400,
+          },
         }"
       >
         <el-card class="bar-card" shadow="never">
@@ -128,14 +123,14 @@ const optionsBasis: Array<OptionsType> = [
         :xs="24"
         :initial="{
           opacity: 0,
-          y: 100
+          y: 100,
         }"
         :enter="{
           opacity: 1,
           y: 0,
           transition: {
-            delay: 480
-          }
+            delay: 480,
+          },
         }"
       >
         <el-card shadow="never">
@@ -149,7 +144,7 @@ const optionsBasis: Array<OptionsType> = [
               'flex',
               'justify-between',
               'items-start',
-              index === 0 ? 'mt-8' : 'mt-[2.15rem]'
+              index === 0 ? 'mt-8' : 'mt-[2.15rem]',
             ]"
           >
             <el-progress
@@ -175,14 +170,14 @@ const optionsBasis: Array<OptionsType> = [
         :xs="24"
         :initial="{
           opacity: 0,
-          y: 100
+          y: 100,
         }"
         :enter="{
           opacity: 1,
           y: 0,
           transition: {
-            delay: 560
-          }
+            delay: 560,
+          },
         }"
       >
         <el-card shadow="never">
@@ -202,14 +197,14 @@ const optionsBasis: Array<OptionsType> = [
         :xs="24"
         :initial="{
           opacity: 0,
-          y: 100
+          y: 100,
         }"
         :enter="{
           opacity: 1,
           y: 0,
           transition: {
-            delay: 640
-          }
+            delay: 640,
+          },
         }"
       >
         <el-card shadow="never">
@@ -227,17 +222,15 @@ const optionsBasis: Array<OptionsType> = [
                   markRaw(
                     useRenderFlicker({
                       background: randomGradient({
-                        randomizeHue: true
-                      })
+                        randomizeHue: true,
+                      }),
                     })
                   )
                 "
                 :timestamp="item.date"
               >
                 <p class="text-text_color_regular text-sm">
-                  {{
-                    `新增 ${item.requiredNumber} 条问题，${item.resolveNumber} 条已解决`
-                  }}
+                  {{ `新增 ${item.requiredNumber} 条问题，${item.resolveNumber} 条已解决` }}
                 </p>
               </el-timeline-item>
             </el-timeline>

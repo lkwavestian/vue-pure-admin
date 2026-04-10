@@ -7,23 +7,19 @@ interface User {
   children?: User[];
 }
 
-const load = (
-  row: User,
-  treeNode: unknown,
-  resolve: (date: User[]) => void
-) => {
+const load = (row: User, treeNode: unknown, resolve: (date: User[]) => void) => {
   setTimeout(() => {
     resolve([
       {
         id: 31,
         date: "2016-05-01",
-        name: "wangxiaohu"
+        name: "wangxiaohu",
       },
       {
         id: 32,
         date: "2016-05-01",
-        name: "wangxiaohu"
-      }
+        name: "wangxiaohu",
+      },
     ]);
   }, 1000);
 };
@@ -32,12 +28,12 @@ const tableData: User[] = [
   {
     id: 1,
     date: "2016-05-02",
-    name: "wangxiaohu"
+    name: "wangxiaohu",
   },
   {
     id: 2,
     date: "2016-05-04",
-    name: "wangxiaohu"
+    name: "wangxiaohu",
   },
   {
     id: 3,
@@ -47,55 +43,55 @@ const tableData: User[] = [
       {
         id: 31,
         date: "2016-05-01",
-        name: "wangxiaohu"
+        name: "wangxiaohu",
       },
       {
         id: 32,
         date: "2016-05-01",
-        name: "wangxiaohu"
-      }
-    ]
+        name: "wangxiaohu",
+      },
+    ],
   },
   {
     id: 4,
     date: "2016-05-03",
-    name: "wangxiaohu"
-  }
+    name: "wangxiaohu",
+  },
 ];
 
 const tableData1: User[] = [
   {
     id: 1,
     date: "2016-05-02",
-    name: "wangxiaohu"
+    name: "wangxiaohu",
   },
   {
     id: 2,
     date: "2016-05-04",
-    name: "wangxiaohu"
+    name: "wangxiaohu",
   },
   {
     id: 3,
     date: "2016-05-01",
     name: "wangxiaohu",
-    hasChildren: true
+    hasChildren: true,
   },
   {
     id: 4,
     date: "2016-05-03",
-    name: "wangxiaohu"
-  }
+    name: "wangxiaohu",
+  },
 ];
 
 const columns: TableColumnList = [
   {
     label: "日期",
-    prop: "date"
+    prop: "date",
   },
   {
     label: "姓名",
-    prop: "name"
-  }
+    prop: "name",
+  },
 ];
 </script>
 
@@ -119,7 +115,7 @@ const columns: TableColumnList = [
       :tree-props="{
         hasChildren: 'hasChildren',
         children: 'children',
-        checkStrictly: false
+        checkStrictly: false,
       }"
     />
   </div>

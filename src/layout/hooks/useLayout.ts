@@ -9,10 +9,7 @@ export function useLayout() {
 
   const initStorage = () => {
     /** 路由 */
-    if (
-      useMultiTagsStore().multiTagsCache &&
-      (!$storage.tags || $storage.tags.length === 0)
-    ) {
+    if (useMultiTagsStore().multiTagsCache && (!$storage.tags || $storage.tags.length === 0)) {
       $storage.tags = routerArrays;
     }
     /** 国际化 */
@@ -29,7 +26,7 @@ export function useLayout() {
         sidebarStatus: $config?.SidebarStatus ?? true,
         epThemeColor: $config?.EpThemeColor ?? "#409EFF",
         themeColor: $config?.Theme ?? "light",
-        themeMode: $config?.ThemeMode ?? "light"
+        themeMode: $config?.ThemeMode ?? "light",
       };
     }
     /** 灰色模式、色弱模式、隐藏标签页 */
@@ -44,7 +41,7 @@ export function useLayout() {
         watermarkText: $config?.WatermarkText ?? "",
         tagsStyle: $config?.TagsStyle ?? "chrome",
         multiTagsCache: $config?.MultiTagsCache ?? false,
-        stretch: $config?.Stretch ?? false
+        stretch: $config?.Stretch ?? false,
       };
     }
   };
@@ -61,6 +58,6 @@ export function useLayout() {
   return {
     layout,
     layoutTheme,
-    initStorage
+    initStorage,
   };
 }

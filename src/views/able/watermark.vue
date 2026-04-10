@@ -3,7 +3,7 @@ import { ref, onMounted, nextTick, onBeforeUnmount } from "vue";
 import { useWatermark } from "@pureadmin/utils";
 
 defineOptions({
-  name: "WaterMark"
+  name: "WaterMark",
 });
 
 const local = ref();
@@ -11,8 +11,7 @@ const preventLocal = ref();
 const color = ref("#409EFF");
 const value = ref("vue-pure-admin");
 const { setWatermark, clear } = useWatermark();
-const { setWatermark: setLocalWatermark, clear: clearLocal } =
-  useWatermark(local);
+const { setWatermark: setLocalWatermark, clear: clearLocal } = useWatermark(local);
 const { setWatermark: setPreventLocalWatermark } = useWatermark(preventLocal);
 
 onMounted(() => {
@@ -20,7 +19,7 @@ onMounted(() => {
     setPreventLocalWatermark("无法删除的水印", {
       forever: true,
       width: 180,
-      height: 70
+      height: 70,
     });
   });
 });
@@ -61,9 +60,7 @@ onBeforeUnmount(() => {
     </el-space>
 
     <el-space wrap>
-      <el-button plain @click="setWatermark(value, { color })">
-        创建整页水印
-      </el-button>
+      <el-button plain @click="setWatermark(value, { color })"> 创建整页水印 </el-button>
       <el-button
         plain
         @click="
@@ -71,8 +68,8 @@ onBeforeUnmount(() => {
             gradient: [
               { value: 0, color: 'magenta' },
               { value: 0.5, color: 'blue' },
-              { value: 1.0, color: 'red' }
-            ]
+              { value: 1.0, color: 'red' },
+            ],
           })
         "
       >
@@ -86,8 +83,8 @@ onBeforeUnmount(() => {
             gradient: [
               { value: 0, color: 'magenta' },
               { value: 0.5, color: 'blue' },
-              { value: 1.0, color: 'red' }
-            ]
+              { value: 1.0, color: 'red' },
+            ],
           })
         "
       >
@@ -100,9 +97,9 @@ onBeforeUnmount(() => {
             gradient: [
               { value: 0, color: 'magenta' },
               { value: 0.5, color: 'blue' },
-              { value: 1.0, color: 'red' }
+              { value: 1.0, color: 'red' },
             ],
-            shadowConfig: [20]
+            shadowConfig: [20],
           })
         "
       >
@@ -116,8 +113,8 @@ onBeforeUnmount(() => {
             gradient: [
               { value: 0, color: 'magenta' },
               { value: 0.5, color: 'blue' },
-              { value: 1.0, color: 'red' }
-            ]
+              { value: 1.0, color: 'red' },
+            ],
           })
         "
       >
@@ -135,7 +132,7 @@ onBeforeUnmount(() => {
           setLocalWatermark('局部水印', {
             color,
             width: 140,
-            height: 65
+            height: 65,
           })
         "
       >
@@ -150,8 +147,8 @@ onBeforeUnmount(() => {
             gradient: [
               { value: 0, color: 'magenta' },
               { value: 0.5, color: 'blue' },
-              { value: 1.0, color: 'red' }
-            ]
+              { value: 1.0, color: 'red' },
+            ],
           })
         "
       >
@@ -167,8 +164,8 @@ onBeforeUnmount(() => {
             gradient: [
               { value: 0, color: 'magenta' },
               { value: 0.5, color: 'blue' },
-              { value: 1.0, color: 'red' }
-            ]
+              { value: 1.0, color: 'red' },
+            ],
           })
         "
       >
@@ -183,9 +180,9 @@ onBeforeUnmount(() => {
             gradient: [
               { value: 0, color: 'magenta' },
               { value: 0.5, color: 'blue' },
-              { value: 1.0, color: 'red' }
+              { value: 1.0, color: 'red' },
             ],
-            shadowConfig: [20]
+            shadowConfig: [20],
           })
         "
       >

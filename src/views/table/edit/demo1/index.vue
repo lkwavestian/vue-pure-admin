@@ -20,7 +20,7 @@ const { columns, dataList, onAdd, onDel } = useColumns();
       align-whole="center"
       :header-cell-style="{
         background: 'var(--el-fill-color-light)',
-        color: 'var(--el-text-color-primary)'
+        color: 'var(--el-text-color-primary)',
       }"
       :data="dataList"
       :columns="columns"
@@ -29,12 +29,7 @@ const { columns, dataList, onAdd, onDel } = useColumns();
         <Empty fill="var(--el-svg-monochrome-grey)" class="m-auto" />
       </template>
       <template #append>
-        <el-button
-          plain
-          class="w-full my-2!"
-          :icon="useRenderIcon(AddFill)"
-          @click="onAdd"
-        >
+        <el-button plain class="w-full my-2!" :icon="useRenderIcon(AddFill)" @click="onAdd">
           添加一行数据
         </el-button>
       </template>

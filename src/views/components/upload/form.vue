@@ -10,17 +10,17 @@ const formRef = ref();
 const uploadRef = ref();
 const validateForm = reactive({
   fileList: [],
-  date: ""
+  date: "",
 });
 
-const submitForm = formEl => {
+const submitForm = (formEl) => {
   if (!formEl) return;
-  formEl.validate(valid => {
+  formEl.validate((valid) => {
     if (valid) {
       // 多个 file 在一个接口同时上传
       const formData = createFormData({
-        files: validateForm.fileList.map(file => ({ raw: file.raw })), // file 文件
-        date: validateForm.date // 别的字段
+        files: validateForm.fileList.map((file) => ({ raw: file.raw })), // file 文件
+        date: validateForm.date, // 别的字段
       });
       formUpload(formData)
         .then(({ code }) => {
@@ -30,7 +30,7 @@ const submitForm = formEl => {
             message("提交失败");
           }
         })
-        .catch(error => {
+        .catch((error) => {
           message(`提交异常 ${error}`, { type: "error" });
         });
     } else {
@@ -39,7 +39,7 @@ const submitForm = formEl => {
   });
 };
 
-const resetForm = formEl => {
+const resetForm = (formEl) => {
   if (!formEl) return;
   formEl.resetFields();
 };
@@ -67,11 +67,7 @@ const resetForm = formEl => {
         </div>
       </el-upload>
     </el-form-item>
-    <el-form-item
-      label="日期"
-      prop="date"
-      :rules="[{ required: true, message: '日期不能为空' }]"
-    >
+    <el-form-item label="日期" prop="date" :rules="[{ required: true, message: '日期不能为空' }]">
       <el-date-picker
         v-model="validateForm.date"
         type="datetime"
@@ -81,9 +77,7 @@ const resetForm = formEl => {
       />
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" text bg @click="submitForm(formRef)">
-        提交
-      </el-button>
+      <el-button type="primary" text bg @click="submitForm(formRef)"> 提交 </el-button>
       <el-button text bg @click="resetForm(formRef)">重置</el-button>
     </el-form-item>
   </el-form>

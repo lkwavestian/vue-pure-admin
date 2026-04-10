@@ -9,7 +9,7 @@ import { createFormData, deviceDetection } from "@pureadmin/utils";
 import uploadLine from "~icons/ri/upload-line";
 
 defineOptions({
-  name: "Profile"
+  name: "Profile",
 });
 
 const imgSrc = ref("");
@@ -24,36 +24,27 @@ const userInfos = reactive({
   nickname: "",
   email: "",
   phone: "",
-  description: ""
+  description: "",
 });
 
 const rules = reactive<FormRules<UserInfo>>({
-  nickname: [{ required: true, message: "昵称必填", trigger: "blur" }]
+  nickname: [{ required: true, message: "昵称必填", trigger: "blur" }],
 });
 
 function queryEmail(queryString, callback) {
-  const emailList = [
-    { value: "@qq.com" },
-    { value: "@126.com" },
-    { value: "@163.com" }
-  ];
+  const emailList = [{ value: "@qq.com" }, { value: "@126.com" }, { value: "@163.com" }];
   let results = [];
   let queryList = [];
-  emailList.map(item =>
-    queryList.push({ value: queryString.split("@")[0] + item.value })
-  );
+  emailList.map((item) => queryList.push({ value: queryString.split("@")[0] + item.value }));
   results = queryString
-    ? queryList.filter(
-        item =>
-          item.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0
-      )
+    ? queryList.filter((item) => item.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0)
     : queryList;
   callback(results);
 }
 
-const onChange = uploadFile => {
+const onChange = (uploadFile) => {
   const reader = new FileReader();
-  reader.onload = e => {
+  reader.onload = (e) => {
     imgSrc.value = e.target.result as string;
     isShow.value = true;
   };
@@ -70,7 +61,7 @@ const onCropper = ({ blob }) => (cropperBlob.value = blob);
 
 const handleSubmitImage = () => {
   const formData = createFormData({
-    files: new File([cropperBlob.value], "avatar")
+    files: new File([cropperBlob.value], "avatar"),
   });
   formUpload(formData)
     .then(({ code }) => {
@@ -81,7 +72,7 @@ const handleSubmitImage = () => {
         message("更新头像失败");
       }
     })
-    .catch(error => {
+    .catch((error) => {
       message(`提交异常 ${error}`, { type: "error" });
     });
 };
@@ -109,12 +100,7 @@ onMounted(async () => {
 <template>
   <div :class="['min-w-45', deviceDetection() ? 'max-w-full' : 'max-w-[70%]']">
     <h3 class="my-8!">个人信息</h3>
-    <el-form
-      ref="userInfoFormRef"
-      label-position="top"
-      :rules="rules"
-      :model="userInfos"
-    >
+    <el-form ref="userInfoFormRef" label-position="top" :rules="rules" :model="userInfos">
       <el-form-item label="头像">
         <el-avatar :size="80" :src="userInfos.avatar" />
         <el-upload
@@ -146,11 +132,7 @@ onMounted(async () => {
         />
       </el-form-item>
       <el-form-item label="联系电话">
-        <el-input
-          v-model="userInfos.phone"
-          placeholder="请输入联系电话"
-          clearable
-        />
+        <el-input v-model="userInfos.phone" placeholder="请输入联系电话" clearable />
       </el-form-item>
       <el-form-item label="简介">
         <el-input
@@ -162,9 +144,7 @@ onMounted(async () => {
           show-word-limit
         />
       </el-form-item>
-      <el-button type="primary" @click="onSubmit(userInfoFormRef)">
-        更新信息
-      </el-button>
+      <el-button type="primary" @click="onSubmit(userInfoFormRef)"> 更新信息 </el-button>
     </el-form>
     <el-dialog
       v-model="isShow"
@@ -179,9 +159,7 @@ onMounted(async () => {
       <template #footer>
         <div class="dialog-footer">
           <el-button bg text @click="handleClose">取消</el-button>
-          <el-button bg text type="primary" @click="handleSubmitImage">
-            确定
-          </el-button>
+          <el-button bg text type="primary" @click="handleSubmitImage"> 确定 </el-button>
         </div>
       </template>
     </el-dialog>

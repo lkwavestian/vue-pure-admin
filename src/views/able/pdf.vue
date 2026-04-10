@@ -4,7 +4,7 @@ import { useI18n } from "vue-i18n";
 import VuePdfEmbed from "vue-pdf-embed";
 
 defineOptions({
-  name: "Pdf"
+  name: "Pdf",
 });
 
 const { t } = useI18n();
@@ -60,9 +60,7 @@ const onPrint = () => {
       :element-loading-text="t('status.pureLoad')"
     >
       <div class="flex-bc h-9">
-        <div v-if="showAllPages" class="font-medium ml-1.25 text-xl">
-          共{{ pageCount }}页
-        </div>
+        <div v-if="showAllPages" class="font-medium ml-1.25 text-xl">共{{ pageCount }}页</div>
         <div v-else>
           <el-pagination
             v-model:current-page="currentPage"
@@ -81,20 +79,16 @@ const onPrint = () => {
           <IconifyIconOnline
             v-tippy="{
               maxWidth: 'none',
-              content: `翻转（当前角度${rotations[currentRotation]}度）`
+              content: `翻转（当前角度${rotations[currentRotation]}度）`,
             }"
             icon="ic:baseline-rotate-90-degrees-ccw"
             class="cursor-pointer outline-transparent"
-            @click="
-              currentRotation === 3
-                ? (currentRotation = 0)
-                : (currentRotation += 1)
-            "
+            @click="currentRotation === 3 ? (currentRotation = 0) : (currentRotation += 1)"
           />
           <IconifyIconOnline
             v-tippy="{
               maxWidth: 'none',
-              content: '打印'
+              content: '打印',
             }"
             icon="ri:printer-line"
             class="cursor-pointer outline-transparent"

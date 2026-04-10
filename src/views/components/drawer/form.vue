@@ -12,7 +12,7 @@ export interface FormProps {
 // 声明 props 默认值
 // 推荐阅读：https://cn.vuejs.org/guide/typescript/composition-api.html#typing-component-props
 const props = withDefaults(defineProps<FormProps>(), {
-  formInline: () => ({ user: "", region: "" })
+  formInline: () => ({ user: "", region: "" }),
 });
 
 // vue 规定所有的 prop 都遵循着单向绑定原则，直接修改 prop 时，Vue 会抛出警告。此处的写法仅仅是为了消除警告。
@@ -26,18 +26,10 @@ const newFormInline = ref(props.formInline);
 <template>
   <el-form :model="newFormInline">
     <el-form-item label="姓名">
-      <el-input
-        v-model="newFormInline.user"
-        class="w-55!"
-        placeholder="请输入姓名"
-      />
+      <el-input v-model="newFormInline.user" class="w-55!" placeholder="请输入姓名" />
     </el-form-item>
     <el-form-item label="城市">
-      <el-select
-        v-model="newFormInline.region"
-        class="w-55!"
-        placeholder="请选择城市"
-      >
+      <el-select v-model="newFormInline.region" class="w-55!" placeholder="请选择城市">
         <el-option label="上海" value="上海" />
         <el-option label="浙江" value="浙江" />
         <el-option label="深圳" value="深圳" />

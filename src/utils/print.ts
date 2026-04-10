@@ -17,7 +17,7 @@ const Print = function (dom, options?: object): PrintFunction {
     // Callback before printing
     printBeforeFn: null,
     // Callback after printing
-    printDoneCallBack: null
+    printDoneCallBack: null,
   };
   // @ts-expect-error
   for (const key in this.conf) {
@@ -135,10 +135,7 @@ Print.prototype = {
     const iframe: HTMLIFrameElement = document.createElement("iframe");
     const f: HTMLIFrameElement = document.body.appendChild(iframe);
     iframe.id = "myIframe";
-    iframe.setAttribute(
-      "style",
-      "position:absolute;width:0;height:0;top:-10px;left:-10px;"
-    );
+    iframe.setAttribute("style", "position:absolute;width:0;height:0;top:-10px;left:-10px;");
 
     // eslint-disable-next-line prefer-const
     w = f.contentWindow || f.contentDocument;
@@ -198,10 +195,7 @@ Print.prototype = {
         }
       : function (obj) {
           return (
-            obj &&
-            typeof obj === "object" &&
-            obj.nodeType === 1 &&
-            typeof obj.nodeName === "string"
+            obj && typeof obj === "object" && obj.nodeType === 1 && typeof obj.nodeName === "string"
           );
         },
   /**
@@ -210,14 +204,14 @@ Print.prototype = {
    */
   setDomHeight(arr) {
     if (arr && arr.length) {
-      arr.forEach(name => {
+      arr.forEach((name) => {
         const domArr = document.querySelectorAll(name);
-        domArr.forEach(dom => {
+        domArr.forEach((dom) => {
           dom.style.height = dom.offsetHeight + "px";
         });
       });
     }
-  }
+  },
 };
 
 export default Print;

@@ -7,8 +7,8 @@ export default defineComponent({
   components: { IconifyIcon },
   props: {
     icon: {
-      default: null
-    }
+      default: null,
+    },
   },
   render() {
     if (typeof this.icon === "object") addIcon(this.icon, this.icon);
@@ -22,10 +22,10 @@ export default defineComponent({
           style: attrs?.style
             ? Object.assign(attrs.style, { outline: "none" })
             : { outline: "none" },
-          ...attrs
+          ...attrs,
         },
         {
-          default: () => []
+          default: () => [],
         }
       );
     } else {
@@ -36,12 +36,12 @@ export default defineComponent({
           style: attrs?.style
             ? Object.assign(attrs.style, { outline: "none" })
             : { outline: "none" },
-          ...attrs
+          ...attrs,
         },
         {
-          default: () => []
+          default: () => [],
         }
       );
     }
-  }
+  },
 });

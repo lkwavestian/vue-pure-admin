@@ -4,11 +4,11 @@ import ReCropper from "@/components/ReCropper";
 import { formatBytes } from "@pureadmin/utils";
 
 defineOptions({
-  name: "ReCropperPreview"
+  name: "ReCropperPreview",
 });
 
 defineProps({
-  imgSrc: String
+  imgSrc: String,
 });
 
 const emit = defineEmits(["cropper"]);
@@ -34,12 +34,7 @@ defineExpose({ hidePopover });
 
 <template>
   <div v-loading="!showPopover" element-loading-background="transparent">
-    <el-popover
-      ref="popoverRef"
-      :visible="showPopover"
-      placement="right"
-      width="18vw"
-    >
+    <el-popover ref="popoverRef" :visible="showPopover" placement="right" width="18vw">
       <template #reference>
         <div class="w-[18vw]">
           <ReCropper
@@ -62,13 +57,8 @@ defineExpose({ hidePopover });
           fit="cover"
         />
         <div v-if="infos" class="mt-1">
-          <p>
-            图像大小：{{ parseInt(infos.width) }} ×
-            {{ parseInt(infos.height) }}像素
-          </p>
-          <p>
-            文件大小：{{ formatBytes(infos.size) }}（{{ infos.size }} 字节）
-          </p>
+          <p>图像大小：{{ parseInt(infos.width) }} × {{ parseInt(infos.height) }}像素</p>
+          <p>文件大小：{{ formatBytes(infos.size) }}（{{ infos.size }} 字节）</p>
         </div>
       </div>
     </el-popover>

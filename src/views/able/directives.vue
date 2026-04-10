@@ -3,7 +3,7 @@ import { ref } from "vue";
 import { message } from "@/utils/message";
 
 defineOptions({
-  name: "Directives"
+  name: "Directives",
 });
 
 const search = ref("");
@@ -74,7 +74,7 @@ function onReset() {
           event: 'input',
           fn: onInput,
           immediate: true,
-          timeout: 1000
+          timeout: 1000,
         }"
         class="w-50!"
         clearable
@@ -98,7 +98,7 @@ function onReset() {
           event: 'input',
           fn: onInputThree,
           timeout: 400,
-          params: { name: '小明', sex: '男' }
+          params: { name: '小明', sex: '男' },
         }"
         class="w-50!"
         clearable
@@ -123,7 +123,7 @@ function onReset() {
         v-optimize:throttle="{
           event: 'input',
           fn: onInputFive,
-          params: { name: '小明', sex: '男' }
+          params: { name: '小明', sex: '男' },
         }"
         class="w-50!"
         clearable
@@ -145,12 +145,8 @@ function onReset() {
     <el-space wrap>
       长按指令
       <el-button v-longpress="onLongpress">长按（默认500ms）</el-button>
-      <el-button v-longpress:1000="onCustomLongpress">
-        自定义长按时长（1000ms）
-      </el-button>
-      <el-button v-longpress:2000:200="onCbLongpress">
-        2秒后每200ms持续回调
-      </el-button>
+      <el-button v-longpress:1000="onCustomLongpress"> 自定义长按时长（1000ms） </el-button>
+      <el-button v-longpress:2000:200="onCbLongpress"> 2秒后每200ms持续回调 </el-button>
       <el-button @click="onReset"> 重置状态 </el-button>
       <el-tag :type="long ? 'success' : 'info'" class="ml-2" size="large">
         {{ long ? "当前为长按状态" : "当前非长按状态" }}

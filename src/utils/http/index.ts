@@ -1,13 +1,13 @@
 import Axios, {
   type AxiosInstance,
   type AxiosRequestConfig,
-  type CustomParamsSerializer
+  type CustomParamsSerializer,
 } from "axios";
 import type {
   PureHttpError,
   RequestMethods,
   PureHttpResponse,
-  PureHttpRequestConfig
+  PureHttpRequestConfig,
 } from "./types.d";
 import { stringify } from "qs";
 import { message } from "@/utils/message";
@@ -22,12 +22,12 @@ const defaultConfig: AxiosRequestConfig = {
   headers: {
     Accept: "application/json, text/plain, */*",
     "Content-Type": "application/json",
-    "X-Requested-With": "XMLHttpRequest"
+    "X-Requested-With": "XMLHttpRequest",
   },
   // 数组格式参数序列化（https://github.com/axios/axios/issues/5142）
   paramsSerializer: {
-    serialize: stringify as unknown as CustomParamsSerializer
-  }
+    serialize: stringify as unknown as CustomParamsSerializer,
+  },
 };
 
 class PureHttp {
@@ -50,7 +50,7 @@ class PureHttp {
 
   /** 重连原始请求 */
   private static retryOriginalRequest(config: PureHttpRequestConfig) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       PureHttp.requests.push((token: string) => {
         config.headers["Authorization"] = formatToken(token);
         resolve(config);
@@ -73,9 +73,9 @@ class PureHttp {
         }
         /** 请求白名单，放置一些不需要`token`的接口（通过设置请求白名单，防止`token`过期后再请求造成的死循环问题） */
         const whiteList = ["/refresh-token", "/login"];
-        return whiteList.some(url => config.url.endsWith(url))
+        return whiteList.some((url) => config.url.endsWith(url))
           ? config
-          : new Promise(resolve => {
+          : new Promise((resolve) => {
               const data = getToken();
               if (data) {
                 const now = new Date().getTime();
@@ -86,17 +86,17 @@ class PureHttp {
                     // token过期刷新
                     useUserStoreHook()
                       .handRefreshToken({ refreshToken: data.refreshToken })
-                      .then(res => {
+                      .then((res) => {
                         const token = res.data.accessToken;
                         config.headers["Authorization"] = formatToken(token);
-                        PureHttp.requests.forEach(cb => cb(token));
+                        PureHttp.requests.forEach((cb) => cb(token));
                         PureHttp.requests = [];
                       })
-                      .catch(_err => {
+                      .catch((_err) => {
                         PureHttp.requests = [];
                         useUserStoreHook().logOut();
                         message(transformI18n($t("login.pureLoginExpired")), {
-                          type: "warning"
+                          type: "warning",
                         });
                       })
                       .finally(() => {
@@ -105,9 +105,7 @@ class PureHttp {
                   }
                   resolve(PureHttp.retryOriginalRequest(config));
                 } else {
-                  config.headers["Authorization"] = formatToken(
-                    data.accessToken
-                  );
+                  config.headers["Authorization"] = formatToken(data.accessToken);
                   resolve(config);
                 }
               } else {
@@ -115,7 +113,7 @@ class PureHttp {
               }
             });
       },
-      error => {
+      (error) => {
         return Promise.reject(error);
       }
     );
@@ -158,7 +156,7 @@ class PureHttp {
       method,
       url,
       ...param,
-      ...axiosConfig
+      ...axiosConfig,
     } as PureHttpRequestConfig;
 
     // 单独处理自定义请求/响应回调
@@ -168,7 +166,7 @@ class PureHttp {
         .then((response: undefined) => {
           resolve(response);
         })
-        .catch(error => {
+        .catch((error) => {
           reject(error);
         });
     });

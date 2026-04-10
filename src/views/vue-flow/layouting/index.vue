@@ -55,11 +55,7 @@ async function layoutGraph(direction) {
 
 <template>
   <div class="layout-flow">
-    <VueFlow
-      :nodes="nodes"
-      :edges="edges"
-      @nodes-initialized="layoutGraph('LR')"
-    >
+    <VueFlow :nodes="nodes" :edges="edges" @nodes-initialized="layoutGraph('LR')">
       <template #node-process="props">
         <ProcessNode
           :data="props.data"

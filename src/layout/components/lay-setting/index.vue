@@ -1,14 +1,5 @@
 <script setup lang="ts">
-import {
-  ref,
-  unref,
-  watch,
-  reactive,
-  computed,
-  nextTick,
-  onUnmounted,
-  onBeforeMount
-} from "vue";
+import { ref, unref, watch, reactive, computed, nextTick, onUnmounted, onBeforeMount } from "vue";
 import { useI18n } from "vue-i18n";
 import { emitter } from "@/utils/mitt";
 import LayPanel from "../lay-panel/index.vue";
@@ -42,7 +33,7 @@ const {
   themeColors,
   toggleClass,
   dataThemeChange,
-  setLayoutThemeColor
+  setLayoutThemeColor,
 } = useDataThemeChange();
 
 /* body添加layout属性，作用于src/style/sidebar.scss */
@@ -60,7 +51,7 @@ const logoVal = ref($storage.configure?.showLogo ?? true);
 
 const watermarkConfigs = reactive({
   enable: $storage.configure.watermark,
-  text: $storage.configure.watermarkText
+  text: $storage.configure.watermarkText,
 });
 
 const settings = reactive({
@@ -71,18 +62,18 @@ const settings = reactive({
   tagsStyle: $storage.configure.tagsStyle,
   hideFooter: $storage.configure.hideFooter,
   multiTagsCache: $storage.configure.multiTagsCache,
-  stretch: $storage.configure.stretch
+  stretch: $storage.configure.stretch,
 });
 
 const getThemeColorStyle = computed(() => {
-  return color => {
+  return (color) => {
     return { background: color };
   };
 });
 
 /** 当网页整体为暗色风格时不显示亮白色主题配色切换选项 */
 const showThemeColors = computed(() => {
-  return themeColor => {
+  return (themeColor) => {
     return themeColor === "light" && isDark.value ? false : true;
   };
 });
@@ -151,7 +142,7 @@ function logoChange() {
 }
 
 function setFalse(Doms): any {
-  Doms.forEach(v => {
+  Doms.forEach((v) => {
     toggleClass(false, "is-select", unref(v));
   });
 }
@@ -162,17 +153,17 @@ const stretchTypeOptions = computed<Array<OptionsType>>(() => {
     {
       label: t("panel.pureStretchFixed"),
       tip: t("panel.pureStretchFixedTip"),
-      value: "fixed"
+      value: "fixed",
     },
     {
       label: t("panel.pureStretchCustom"),
       tip: t("panel.pureStretchCustomTip"),
-      value: "custom"
-    }
+      value: "custom",
+    },
   ];
 });
 
-const setStretch = value => {
+const setStretch = (value) => {
   settings.stretch = value;
   storageConfigureChange("stretch", value);
 };
@@ -184,16 +175,10 @@ const stretchTypeChange = ({ option }) => {
 
 /** 主题色 激活选择项 */
 const getThemeColor = computed(() => {
-  return current => {
-    if (
-      current === layoutTheme.value.theme &&
-      layoutTheme.value.theme !== "light"
-    ) {
+  return (current) => {
+    if (current === layoutTheme.value.theme && layoutTheme.value.theme !== "light") {
       return "#fff";
-    } else if (
-      current === layoutTheme.value.theme &&
-      layoutTheme.value.theme === "light"
-    ) {
+    } else if (current === layoutTheme.value.theme && layoutTheme.value.theme === "light") {
       return "#1d2b45";
     } else {
       return "transparent";
@@ -212,22 +197,22 @@ const themeOptions = computed<Array<OptionsType>>(() => {
       icon: DayIcon,
       theme: "light",
       tip: t("panel.pureThemeModeLightTip"),
-      iconAttrs: { fill: isDark.value ? "#fff" : "#000" }
+      iconAttrs: { fill: isDark.value ? "#fff" : "#000" },
     },
     {
       label: t("panel.pureThemeModeDark"),
       icon: DarkIcon,
       theme: "dark",
       tip: t("panel.pureThemeModeDarkTip"),
-      iconAttrs: { fill: isDark.value ? "#fff" : "#000" }
+      iconAttrs: { fill: isDark.value ? "#fff" : "#000" },
     },
     {
       label: t("panel.pureThemeModeSystem"),
       icon: SystemIcon,
       theme: "system",
       tip: t("panel.pureThemeModeSystemTip"),
-      iconAttrs: { fill: isDark.value ? "#fff" : "#000" }
-    }
+      iconAttrs: { fill: isDark.value ? "#fff" : "#000" },
+    },
   ];
 });
 
@@ -236,18 +221,18 @@ const markOptions = computed<Array<OptionsType>>(() => {
     {
       label: t("panel.pureTagsStyleSmart"),
       tip: t("panel.pureTagsStyleSmartTip"),
-      value: "smart"
+      value: "smart",
     },
     {
       label: t("panel.pureTagsStyleCard"),
       tip: t("panel.pureTagsStyleCardTip"),
-      value: "card"
+      value: "card",
     },
     {
       label: t("panel.pureTagsStyleChrome"),
       tip: t("panel.pureTagsStyleChromeTip"),
-      value: "chrome"
-    }
+      value: "chrome",
+    },
   ];
 });
 
@@ -262,7 +247,7 @@ function setMenuLayout(layout: string) {
     sidebarStatus: $storage.layout?.sidebarStatus,
     epThemeColor: $storage.layout?.epThemeColor,
     themeColor: $storage.layout?.themeColor,
-    themeMode: $storage.layout?.themeMode
+    themeMode: $storage.layout?.themeMode,
   };
   useAppStoreHook().setLayout(layout);
 }
@@ -315,10 +300,8 @@ onBeforeMount(() => {
   /* 初始化系统配置 */
   nextTick(() => {
     watchSystemThemeChange();
-    settings.greyVal &&
-      document.querySelector("html")?.classList.add("html-grey");
-    settings.weakVal &&
-      document.querySelector("html")?.classList.add("html-weakness");
+    settings.greyVal && document.querySelector("html")?.classList.add("html-grey");
+    settings.weakVal && document.querySelector("html")?.classList.add("html-weakness");
     settings.tabsVal && tagsChange();
     settings.hideFooter && hideFooterChange();
   });
@@ -337,10 +320,8 @@ onUnmounted(() => removeMatchMedia);
         :modelValue="themeMode === 'system' ? 2 : dataTheme ? 1 : 0"
         :options="themeOptions"
         @change="
-          theme => {
-            theme.index === 1 && theme.index !== 2
-              ? (dataTheme = true)
-              : (dataTheme = false);
+          (theme) => {
+            theme.index === 1 && theme.index !== 2 ? (dataTheme = true) : (dataTheme = false);
             themeMode = theme.option.theme;
             dataThemeChange(theme.option.theme);
             theme.index === 2 && watchSystemThemeChange();
@@ -357,11 +338,7 @@ onUnmounted(() => removeMatchMedia);
           :style="getThemeColorStyle(item.color)"
           @click="setLayoutThemeColor(item.themeColor)"
         >
-          <el-icon
-            class="mt-px"
-            :size="20"
-            :color="getThemeColor(item.themeColor)"
-          >
+          <el-icon class="mt-px" :size="20" :color="getThemeColor(item.themeColor)">
             <IconifyIconOffline :icon="Check" />
           </el-icon>
         </li>
@@ -373,7 +350,7 @@ onUnmounted(() => removeMatchMedia);
           ref="verticalRef"
           v-tippy="{
             content: t('panel.pureVerticalTip'),
-            zIndex: 41000
+            zIndex: 41000,
           }"
           :class="layoutTheme.layout === 'vertical' ? 'is-select' : ''"
           @click="setMenuLayout('vertical')"
@@ -386,7 +363,7 @@ onUnmounted(() => removeMatchMedia);
           ref="horizontalRef"
           v-tippy="{
             content: t('panel.pureHorizontalTip'),
-            zIndex: 41000
+            zIndex: 41000,
           }"
           :class="layoutTheme.layout === 'horizontal' ? 'is-select' : ''"
           @click="setMenuLayout('horizontal')"
@@ -399,7 +376,7 @@ onUnmounted(() => removeMatchMedia);
           ref="mixRef"
           v-tippy="{
             content: t('panel.pureMixTip'),
-            zIndex: 41000
+            zIndex: 41000,
           }"
           :class="layoutTheme.layout === 'mix' ? 'is-select' : ''"
           @click="setMenuLayout('mix')"
@@ -424,7 +401,7 @@ onUnmounted(() => removeMatchMedia);
           :min="1280"
           :max="1600"
           controls-position="right"
-          @change="value => setStretch(value)"
+          @change="(value) => setStretch(value)"
         />
         <button
           v-else
@@ -437,16 +414,12 @@ onUnmounted(() => removeMatchMedia);
             :class="[settings.stretch ? 'w-[24%]' : 'w-[50%]']"
             style="color: var(--el-color-primary)"
           >
-            <IconifyIconOffline
-              :icon="settings.stretch ? RightArrow : LeftArrow"
-            />
+            <IconifyIconOffline :icon="settings.stretch ? RightArrow : LeftArrow" />
             <div
               class="grow border-0 border-b border-dashed"
               style="border-color: var(--el-color-primary)"
             />
-            <IconifyIconOffline
-              :icon="settings.stretch ? LeftArrow : RightArrow"
-            />
+            <IconifyIconOffline :icon="settings.stretch ? LeftArrow : RightArrow" />
           </div>
         </button>
       </span>
@@ -455,9 +428,7 @@ onUnmounted(() => removeMatchMedia);
       <Segmented
         resize
         class="select-none"
-        :modelValue="
-          tagsStyleValue === 'smart' ? 0 : tagsStyleValue === 'card' ? 1 : 2
-        "
+        :modelValue="tagsStyleValue === 'smart' ? 0 : tagsStyleValue === 'card' ? 1 : 2"
         :options="markOptions"
         @change="onChange"
       />

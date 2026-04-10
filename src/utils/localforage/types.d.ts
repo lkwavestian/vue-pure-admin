@@ -17,16 +17,9 @@ interface LocalForageOptions extends LocalForageDbInstanceOptions {
 }
 
 interface LocalForageDbMethodsCore {
-  getItem<T>(
-    key: string,
-    callback?: (err: any, value: T | null) => void
-  ): Promise<T | null>;
+  getItem<T>(key: string, callback?: (err: any, value: T | null) => void): Promise<T | null>;
 
-  setItem<T>(
-    key: string,
-    value: T,
-    callback?: (err: any, value: T) => void
-  ): Promise<T>;
+  setItem<T>(key: string, value: T, callback?: (err: any, value: T) => void): Promise<T>;
 
   removeItem(key: string, callback?: (err: any) => void): Promise<void>;
 
@@ -34,10 +27,7 @@ interface LocalForageDbMethodsCore {
 
   length(callback?: (err: any, numberOfKeys: number) => void): Promise<number>;
 
-  key(
-    keyIndex: number,
-    callback?: (err: any, key: string) => void
-  ): Promise<string>;
+  key(keyIndex: number, callback?: (err: any, key: string) => void): Promise<string>;
 
   keys(callback?: (err: any, keys: string[]) => void): Promise<string[]>;
 
@@ -48,10 +38,7 @@ interface LocalForageDbMethodsCore {
 }
 
 interface LocalForageDropInstanceFn {
-  (
-    dbInstanceOptions?: LocalForageDbInstanceOptions,
-    callback?: (err: any) => void
-  ): Promise<void>;
+  (dbInstanceOptions?: LocalForageDbInstanceOptions, callback?: (err: any) => void): Promise<void>;
 }
 
 interface LocalForageDriverMethodsOptional {
@@ -80,10 +67,7 @@ interface LocalForageDriver extends LocalForageDriverDbMethods {
 }
 
 interface LocalForageSerializer {
-  serialize<T>(
-    value: T | ArrayBuffer | Blob,
-    callback: (value: string, error: any) => void
-  ): void;
+  serialize<T>(value: T | ArrayBuffer | Blob, callback: (value: string, error: any) => void): void;
 
   deserialize<T>(value: string): T | ArrayBuffer | Blob;
 
@@ -92,8 +76,7 @@ interface LocalForageSerializer {
   bufferToString(buffer: ArrayBuffer): string;
 }
 
-interface LocalForageDbMethods
-  extends LocalForageDbMethodsCore, LocalForageDbMethodsOptional {}
+interface LocalForageDbMethods extends LocalForageDbMethodsCore, LocalForageDbMethodsOptional {}
 
 export interface LocalForage extends LocalForageDbMethods {
   LOCALSTORAGE: string;

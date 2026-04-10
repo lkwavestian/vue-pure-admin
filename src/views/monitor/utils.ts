@@ -12,7 +12,7 @@ export const getPickerShortcuts = (): Array<{
         const todayEnd = new Date();
         todayEnd.setHours(23, 59, 59, 999);
         return [today, todayEnd];
-      }
+      },
     },
     {
       text: "昨天",
@@ -24,7 +24,7 @@ export const getPickerShortcuts = (): Array<{
         yesterdayEnd.setDate(yesterdayEnd.getDate() - 1);
         yesterdayEnd.setHours(23, 59, 59, 999);
         return [yesterday, yesterdayEnd];
-      }
+      },
     },
     {
       text: "前天",
@@ -36,7 +36,7 @@ export const getPickerShortcuts = (): Array<{
         beforeYesterdayEnd.setDate(beforeYesterdayEnd.getDate() - 2);
         beforeYesterdayEnd.setHours(23, 59, 59, 999);
         return [beforeYesterday, beforeYesterdayEnd];
-      }
+      },
     },
     {
       text: "本周",
@@ -57,7 +57,7 @@ export const getPickerShortcuts = (): Array<{
             999
         );
         return [startOfWeek, endOfWeek];
-      }
+      },
     },
     {
       text: "上周",
@@ -78,7 +78,7 @@ export const getPickerShortcuts = (): Array<{
             999
         );
         return [startOfLastWeek, endOfLastWeek];
-      }
+      },
     },
     {
       text: "本月",
@@ -86,33 +86,21 @@ export const getPickerShortcuts = (): Array<{
         const today = new Date();
         const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
         startOfMonth.setHours(0, 0, 0, 0);
-        const endOfMonth = new Date(
-          today.getFullYear(),
-          today.getMonth() + 1,
-          0
-        );
+        const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
         endOfMonth.setHours(23, 59, 59, 999);
         return [startOfMonth, endOfMonth];
-      }
+      },
     },
     {
       text: "上个月",
       value: () => {
         const today = new Date();
-        const startOfLastMonth = new Date(
-          today.getFullYear(),
-          today.getMonth() - 1,
-          1
-        );
+        const startOfLastMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1);
         startOfLastMonth.setHours(0, 0, 0, 0);
-        const endOfLastMonth = new Date(
-          today.getFullYear(),
-          today.getMonth(),
-          0
-        );
+        const endOfLastMonth = new Date(today.getFullYear(), today.getMonth(), 0);
         endOfLastMonth.setHours(23, 59, 59, 999);
         return [startOfLastMonth, endOfLastMonth];
-      }
+      },
     },
     {
       text: "本年",
@@ -123,7 +111,7 @@ export const getPickerShortcuts = (): Array<{
         const endOfYear = new Date(today.getFullYear(), 11, 31);
         endOfYear.setHours(23, 59, 59, 999);
         return [startOfYear, endOfYear];
-      }
-    }
+      },
+    },
   ];
 };

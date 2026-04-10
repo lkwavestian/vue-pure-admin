@@ -17,7 +17,7 @@ const {
   onReset,
   onSearch,
   removeTag,
-  handleSelectionChange
+  handleSelectionChange,
 } = useColumns(selectRef, formRef, tableRef);
 </script>
 
@@ -65,9 +65,7 @@ const {
             />
           </el-form-item>
           <el-form-item class="float-right mr-0!">
-            <el-button type="primary" text bg @click="onSearch">
-              查询
-            </el-button>
+            <el-button type="primary" text bg @click="onSearch"> 查询 </el-button>
             <el-button text bg @click="onReset"> 重置 </el-button>
           </el-form-item>
         </el-form>
@@ -78,7 +76,7 @@ const {
           alignWhole="center"
           :header-cell-style="{
             background: 'var(--el-fill-color-light)',
-            color: 'var(--el-text-color-primary)'
+            color: 'var(--el-text-color-primary)',
           }"
           :data="
             tableData.slice(

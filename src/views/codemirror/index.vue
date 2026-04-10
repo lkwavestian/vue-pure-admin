@@ -25,11 +25,11 @@ const cmOptions: EditorConfiguration = reactive({
   lint: true,
   extraKeys: {
     Ctrl: "autocomplete",
-    Tab: "autocomplete"
+    Tab: "autocomplete",
   },
   hintOptions: {
-    completeSingle: false
-  }
+    completeSingle: false,
+  },
 });
 
 const code = ref(`function sayHello() {
@@ -46,7 +46,7 @@ const onReady = (cm: Editor) => {
 
 watch(
   () => isDark.value,
-  async newVal => {
+  async (newVal) => {
     await nextTick();
     newVal
       ? cminstance.value.setOption("theme", "material-darker")

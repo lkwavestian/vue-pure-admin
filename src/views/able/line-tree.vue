@@ -7,7 +7,7 @@ import { extractPathList, deleteChildren } from "@/utils/tree";
 import { usePermissionStoreHook } from "@/store/modules/permission";
 
 defineOptions({
-  name: "LineTree"
+  name: "LineTree",
 });
 
 const menusTree = clone(usePermissionStoreHook().wholeMenus, true);
@@ -17,7 +17,7 @@ const menusData = computed(() => {
 const expandedKeys = extractPathList(menusData.value);
 const dataProps = {
   value: "uniqueId",
-  children: "children"
+  children: "children",
 };
 </script>
 
@@ -25,9 +25,7 @@ const dataProps = {
   <el-card shadow="never">
     <template #header>
       <div class="card-header">
-        <p class="font-medium">
-          扩展 Elemenet Plus 的树形组件包括虚拟树组件，支持连接线
-        </p>
+        <p class="font-medium">扩展 Elemenet Plus 的树形组件包括虚拟树组件，支持连接线</p>
         <el-link
           class="mt-2"
           href="https://github.com/pure-admin/vue-pure-admin/blob/main/src/views/able/line-tree.vue"
@@ -80,12 +78,7 @@ const dataProps = {
               :default-expanded-keys="expandedKeys"
             >
               <template v-slot:default="{ node }">
-                <el-tree-line
-                  :node="node"
-                  :treeData="menusData"
-                  :showLabelLine="true"
-                  :indent="30"
-                >
+                <el-tree-line :node="node" :treeData="menusData" :showLabelLine="true" :indent="30">
                   <template v-slot:node-label>
                     <span class="text-sm">
                       {{ transformI18n(node.data.meta.title) }}

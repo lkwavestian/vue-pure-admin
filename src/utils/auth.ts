@@ -54,7 +54,7 @@ export function setToken(data: DataInfo<Date>) {
 
   expires > 0
     ? Cookies.set(TokenKey, cookieString, {
-        expires: (expires - Date.now()) / 86400000
+        expires: (expires - Date.now()) / 86400000,
       })
     : Cookies.set(TokenKey, cookieString);
 
@@ -63,7 +63,7 @@ export function setToken(data: DataInfo<Date>) {
     "true",
     isRemembered
       ? {
-          expires: loginDay
+          expires: loginDay,
         }
       : {}
   );
@@ -81,7 +81,7 @@ export function setToken(data: DataInfo<Date>) {
       username,
       nickname,
       roles,
-      permissions
+      permissions,
     });
   }
 
@@ -92,25 +92,20 @@ export function setToken(data: DataInfo<Date>) {
       username,
       nickname: data?.nickname ?? "",
       roles,
-      permissions: data?.permissions ?? []
+      permissions: data?.permissions ?? [],
     });
   } else {
-    const avatar =
-      storageLocal().getItem<DataInfo<number>>(userKey)?.avatar ?? "";
-    const username =
-      storageLocal().getItem<DataInfo<number>>(userKey)?.username ?? "";
-    const nickname =
-      storageLocal().getItem<DataInfo<number>>(userKey)?.nickname ?? "";
-    const roles =
-      storageLocal().getItem<DataInfo<number>>(userKey)?.roles ?? [];
-    const permissions =
-      storageLocal().getItem<DataInfo<number>>(userKey)?.permissions ?? [];
+    const avatar = storageLocal().getItem<DataInfo<number>>(userKey)?.avatar ?? "";
+    const username = storageLocal().getItem<DataInfo<number>>(userKey)?.username ?? "";
+    const nickname = storageLocal().getItem<DataInfo<number>>(userKey)?.nickname ?? "";
+    const roles = storageLocal().getItem<DataInfo<number>>(userKey)?.roles ?? [];
+    const permissions = storageLocal().getItem<DataInfo<number>>(userKey)?.permissions ?? [];
     setUserKey({
       avatar,
       username,
       nickname,
       roles,
-      permissions
+      permissions,
     });
   }
 }

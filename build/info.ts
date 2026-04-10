@@ -13,7 +13,7 @@ const welcomeMessage = gradient(["cyan", "magenta"]).multiline(
 const boxenOptions: BoxenOptions = {
   padding: 0.5,
   borderColor: "cyan",
-  borderStyle: "round"
+  borderStyle: "round",
 };
 
 export function viteBuildInfo(): Plugin {
@@ -49,9 +49,9 @@ export function viteBuildInfo(): Plugin {
                 boxenOptions
               )
             );
-          }
+          },
         });
       }
-    }
+    },
   };
 }

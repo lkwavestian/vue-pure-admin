@@ -11,12 +11,6 @@ const { columns, dataList } = useColumns();
         <pre class="w-100"> {{ dataList }}</pre>
       </code>
     </el-scrollbar>
-    <pure-table
-      class="w-[30vw]!"
-      row-key="id"
-      border
-      :data="dataList"
-      :columns="columns"
-    />
+    <pure-table class="w-[30vw]!" row-key="id" border :data="dataList" :columns="columns" />
   </div>
 </template>

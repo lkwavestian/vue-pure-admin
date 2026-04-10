@@ -5,7 +5,7 @@ import { Play, Pause, Forward, Rewind } from "./svg";
 import { ref, onMounted, onBeforeUnmount } from "vue";
 
 defineOptions({
-  name: "Wavesurfer"
+  name: "Wavesurfer",
 });
 
 const loading = ref(true);
@@ -32,7 +32,7 @@ function init() {
     cursorColor: "rgb(64, 158, 255)",
     cursorWidth: 4,
     // backend: "MediaElement",
-    url
+    url,
   });
 
   // 音频被解码后触发
@@ -52,7 +52,7 @@ function init() {
   });
 
   // 音频位置改变时，播放期间连续触发
-  wavesurfer.value.on("timeupdate", timer => {
+  wavesurfer.value.on("timeupdate", (timer) => {
     if (timer > totalSecondTime.value) return;
     const { m, s } = getTime(timer);
     curTime.value = `${m}:${s}`;
@@ -101,11 +101,7 @@ onBeforeUnmount(() => {
         代码位置 src/views/able/wavesurfer
       </el-link>
     </template>
-    <div
-      v-loading="loading"
-      class="w-8/12 m-auto! mt-5!"
-      element-loading-background="transparent"
-    >
+    <div v-loading="loading" class="w-8/12 m-auto! mt-5!" element-loading-background="transparent">
       <div ref="wavesurferRef" />
       <div v-show="totalTime" class="flex justify-between">
         <span class="text-[#81888f]">00:00</span>
@@ -116,7 +112,7 @@ onBeforeUnmount(() => {
         <Rewind
           v-tippy="{
             content: '快退（可长按）',
-            placement: 'bottom'
+            placement: 'bottom',
           }"
           v-longpress:0:100="() => wavesurfer?.skip(-1)"
           class="cursor-pointer"
@@ -124,7 +120,7 @@ onBeforeUnmount(() => {
         <div
           v-tippy="{
             content: isPlay ? '暂停' : '播放',
-            placement: 'bottom'
+            placement: 'bottom',
           }"
           class="cursor-pointer"
           @click="wavesurfer?.playPause()"
@@ -135,7 +131,7 @@ onBeforeUnmount(() => {
         <Forward
           v-tippy="{
             content: '快进（可长按）',
-            placement: 'bottom'
+            placement: 'bottom',
           }"
           v-longpress:0:100="() => wavesurfer?.skip(1)"
           class="cursor-pointer"

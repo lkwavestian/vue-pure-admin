@@ -3,7 +3,7 @@ import { ref } from "vue";
 import Selector from "@/components/ReSelector";
 
 defineOptions({
-  name: "Selector"
+  name: "Selector",
 });
 
 const selectRange = ref<string>("");
@@ -11,13 +11,13 @@ const dataLists = ref([
   {
     title: "基础用法",
     echo: [],
-    disabled: false
+    disabled: false,
   },
   {
     title: "回显模式",
     echo: [2, 7],
-    disabled: true
-  }
+    disabled: true,
+  },
 ]);
 
 const selectedVal = ({ left, right }): void => {
@@ -27,12 +27,7 @@ const selectedVal = ({ left, right }): void => {
 
 <template>
   <div>
-    <el-card
-      v-for="(item, key) in dataLists"
-      :key="key"
-      class="mb-2"
-      shadow="never"
-    >
+    <el-card v-for="(item, key) in dataLists" :key="key" class="mb-2" shadow="never">
       <template #header>
         <p class="font-medium">{{ item.title }}</p>
         <el-link

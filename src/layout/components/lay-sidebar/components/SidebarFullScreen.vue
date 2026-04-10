@@ -14,20 +14,17 @@ isFullscreen.value = !!(
 
 watch(
   isFullscreen,
-  full => {
+  (full) => {
     screenIcon.value = full ? ExitFullscreen : Fullscreen;
   },
   {
-    immediate: true
+    immediate: true,
   }
 );
 </script>
 
 <template>
-  <span
-    class="fullscreen-icon navbar-bg-hover hover:[&>svg]:animate-scale-bounce"
-    @click="toggle"
-  >
+  <span class="fullscreen-icon navbar-bg-hover hover:[&>svg]:animate-scale-bounce" @click="toggle">
     <IconifyIconOffline :icon="screenIcon" />
   </span>
 </template>

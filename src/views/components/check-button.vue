@@ -4,7 +4,7 @@ import { message } from "@/utils/message";
 import { getKeyList } from "@pureadmin/utils";
 
 defineOptions({
-  name: "CheckButton"
+  name: "CheckButton",
 });
 
 const spaceSize = ref(20);
@@ -24,29 +24,29 @@ const checkboxGroupCustom = ref(["tomato", "watermelon", "strawberry"]);
 const checkTag = ref([
   {
     title: "等待中",
-    checked: false
+    checked: false,
   },
   {
     title: "进行中",
-    checked: true
+    checked: true,
   },
   {
     title: "已完成",
-    checked: false
-  }
+    checked: false,
+  },
 ]);
 const curTagMap = ref({});
 function onChecked(tag, index) {
   if (size.value === "disabled") return;
   curTagMap.value[index] = Object.assign({
     ...tag,
-    checked: !tag.checked
+    checked: !tag.checked,
   });
-  checkTag.value.map(item => (item.checked = false));
+  checkTag.value.map((item) => (item.checked = false));
   checkTag.value[index].checked = curTagMap.value[index].checked;
   const { title, checked } = curTagMap.value[index];
   message(checked ? `已选中${title}` : `取消选中${title}`, {
-    type: "success"
+    type: "success",
   });
 }
 
@@ -54,23 +54,23 @@ function onChecked(tag, index) {
 const checkGroupTag = ref([
   {
     title: "苹果",
-    checked: true
+    checked: true,
   },
   {
     title: "西红柿",
-    checked: true
+    checked: true,
   },
   {
     title: "香蕉",
-    checked: false
-  }
+    checked: false,
+  },
 ]);
 const curTagGroupMap = ref({});
 function onGroupChecked(tag, index) {
   if (size.value === "disabled") return;
   curTagGroupMap.value[index] = Object.assign({
     ...tag,
-    checked: !tag.checked
+    checked: !tag.checked,
   });
   checkGroupTag.value[index].checked = curTagGroupMap.value[index].checked;
 }
@@ -80,10 +80,8 @@ function onSingleChecked() {
   checked.value = !checked.value;
 }
 
-watch(size, val =>
-  val === "disabled"
-    ? (dynamicSize.value = "default")
-    : (dynamicSize.value = size.value)
+watch(size, (val) =>
+  val === "disabled" ? (dynamicSize.value = "default") : (dynamicSize.value = size.value)
 );
 </script>
 
@@ -110,11 +108,7 @@ watch(size, val =>
       </el-link>
     </template>
     <div class="mb-2">单选（紧凑风格的按钮样式）</div>
-    <el-radio-group
-      v-model="radio"
-      :size="dynamicSize"
-      :disabled="size === 'disabled'"
-    >
+    <el-radio-group v-model="radio" :size="dynamicSize" :disabled="size === 'disabled'">
       <el-radio-button value="wait">等待中</el-radio-button>
       <el-radio-button value="progress">进行中</el-radio-button>
       <el-radio-button value="complete">已完成</el-radio-button>
@@ -122,11 +116,7 @@ watch(size, val =>
     <el-divider />
 
     <div class="mb-2">单选（带有边框）</div>
-    <el-radio-group
-      v-model="radioBox"
-      :size="dynamicSize"
-      :disabled="size === 'disabled'"
-    >
+    <el-radio-group v-model="radioBox" :size="dynamicSize" :disabled="size === 'disabled'">
       <el-radio value="wait" border>等待中</el-radio>
       <el-radio value="progress" border>进行中</el-radio>
       <el-radio value="complete" border>已完成</el-radio>
@@ -134,11 +124,7 @@ watch(size, val =>
     <el-divider />
 
     <div class="mb-2">单选（自定义内容）</div>
-    <el-radio-group
-      v-model="radioCustom"
-      :size="dynamicSize"
-      :disabled="size === 'disabled'"
-    >
+    <el-radio-group v-model="radioCustom" :size="dynamicSize" :disabled="size === 'disabled'">
       <el-radio-button value="wait">
         <span class="flex">
           <IconifyIconOnline icon="ri:progress-8-fill" class="mr-1" />
@@ -161,11 +147,7 @@ watch(size, val =>
     <el-divider />
 
     <div class="mb-2">多选（紧凑风格的按钮样式）</div>
-    <el-checkbox-group
-      v-model="checkboxGroup"
-      :size="dynamicSize"
-      :disabled="size === 'disabled'"
-    >
+    <el-checkbox-group v-model="checkboxGroup" :size="dynamicSize" :disabled="size === 'disabled'">
       <el-checkbox-button value="apple">苹果</el-checkbox-button>
       <el-checkbox-button value="tomato">西红柿</el-checkbox-button>
       <el-checkbox-button value="banana">香蕉</el-checkbox-button>
@@ -199,19 +181,13 @@ watch(size, val =>
       </el-checkbox-button>
       <el-checkbox-button value="watermelon">
         <span class="flex">
-          <IconifyIconOnline
-            icon="streamline-emojis:watermelon-1"
-            class="mr-1"
-          />
+          <IconifyIconOnline icon="streamline-emojis:watermelon-1" class="mr-1" />
           西瓜
         </span>
       </el-checkbox-button>
       <el-checkbox-button value="strawberry">
         <span class="flex">
-          <IconifyIconOnline
-            icon="streamline-emojis:strawberry-1"
-            class="mr-1"
-          />
+          <IconifyIconOnline icon="streamline-emojis:strawberry-1" class="mr-1" />
           草莓
         </span>
       </el-checkbox-button>
@@ -230,11 +206,7 @@ watch(size, val =>
       <el-check-tag
         v-for="(tag, index) in checkTag"
         :key="index"
-        :class="[
-          'select-none',
-          size === 'disabled' && 'tag-disabled',
-          tag.checked && 'is-active'
-        ]"
+        :class="['select-none', size === 'disabled' && 'tag-disabled', tag.checked && 'is-active']"
         :checked="tag.checked"
         @change="onChecked(tag, index)"
       >
@@ -245,7 +217,7 @@ watch(size, val =>
       多选
       {{
         getKeyList(
-          checkGroupTag.filter(tag => tag.checked),
+          checkGroupTag.filter((tag) => tag.checked),
           "title"
         )
       }}
@@ -254,11 +226,7 @@ watch(size, val =>
       <el-check-tag
         v-for="(tag, index) in checkGroupTag"
         :key="index"
-        :class="[
-          'select-none',
-          size === 'disabled' && 'tag-disabled',
-          tag.checked && 'is-active'
-        ]"
+        :class="['select-none', size === 'disabled' && 'tag-disabled', tag.checked && 'is-active']"
         :checked="tag.checked"
         @change="onGroupChecked(tag, index)"
       >
@@ -269,11 +237,7 @@ watch(size, val =>
 
     <div class="mb-2">单个可选按钮</div>
     <el-check-tag
-      :class="[
-        'select-none',
-        size === 'disabled' && 'tag-disabled',
-        checked && 'is-active'
-      ]"
+      :class="['select-none', size === 'disabled' && 'tag-disabled', checked && 'is-active']"
       :checked="checked"
       @change="onSingleChecked"
     >
@@ -303,14 +267,8 @@ watch(size, val =>
     &.is-disabled {
       .el-checkbox-button__inner {
         color: var(--el-disabled-text-color);
-        background-color: var(
-          --el-button-disabled-bg-color,
-          var(--el-fill-color-blank)
-        );
-        border-color: var(
-          --el-button-disabled-border-color,
-          var(--el-border-color-light)
-        );
+        background-color: var(--el-button-disabled-bg-color, var(--el-fill-color-blank));
+        border-color: var(--el-button-disabled-border-color, var(--el-border-color-light));
       }
     }
   }

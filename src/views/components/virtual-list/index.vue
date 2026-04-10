@@ -4,7 +4,7 @@ import horizontalList from "./horizontal.vue";
 import "vue-virtual-scroller/index.css";
 
 defineOptions({
-  name: "VirtualList"
+  name: "VirtualList",
 });
 </script>
 

@@ -15,19 +15,11 @@ import LaySidebarCenterCollapse from "../lay-sidebar/components/SidebarCenterCol
 const route = useRoute();
 const isShow = ref(false);
 const showLogo = ref(
-  storageLocal().getItem<StorageConfigs>(
-    `${responsiveStorageNameSpace()}configure`
-  )?.showLogo ?? true
+  storageLocal().getItem<StorageConfigs>(`${responsiveStorageNameSpace()}configure`)?.showLogo ??
+    true
 );
 
-const {
-  device,
-  pureApp,
-  isCollapse,
-  tooltipEffect,
-  menuSelect,
-  toggleSideBar
-} = useNav();
+const { device, pureApp, isCollapse, tooltipEffect, menuSelect, toggleSideBar } = useNav();
 
 const subMenuData = ref([]);
 
@@ -50,10 +42,7 @@ function getSubMenuData() {
   path = defaultActive.value;
   subMenuData.value = [];
   // path的上级路由组成的数组
-  const parentPathArr = getParentPaths(
-    path,
-    usePermissionStoreHook().wholeMenus
-  );
+  const parentPathArr = getParentPaths(path, usePermissionStoreHook().wholeMenus);
   // 当前路由的父级路由信息
   const parenetRoute = findRouteByPath(
     parentPathArr[0] || path,
@@ -75,7 +64,7 @@ watch(
 onMounted(() => {
   getSubMenuData();
 
-  emitter.on("logoChange", key => {
+  emitter.on("logoChange", (key) => {
     showLogo.value = key;
   });
 });
@@ -94,10 +83,7 @@ onBeforeUnmount(() => {
     @mouseleave.prevent="isShow = false"
   >
     <LaySidebarLogo v-if="showLogo" :collapse="isCollapse" />
-    <el-scrollbar
-      wrap-class="scrollbar-wrapper"
-      :class="[device === 'mobile' ? 'mobile' : 'pc']"
-    >
+    <el-scrollbar wrap-class="scrollbar-wrapper" :class="[device === 'mobile' ? 'mobile' : 'pc']">
       <el-menu
         unique-opened
         mode="vertical"

@@ -15,7 +15,7 @@ import Refresh from "~icons/ep/refresh";
 import AddFill from "~icons/ri/add-circle-line";
 
 defineOptions({
-  name: "SystemUser"
+  name: "SystemUser",
 });
 
 const treeRef = ref();
@@ -46,7 +46,7 @@ const {
   handleSizeChange,
   onSelectionCancel,
   handleCurrentChange,
-  handleSelectionChange
+  handleSelectionChange,
 } = useUser(tableRef, treeRef);
 </script>
 
@@ -59,9 +59,7 @@ const {
       :treeLoading="treeLoading"
       @tree-select="onTreeSelect"
     />
-    <div
-      :class="[deviceDetection() ? ['w-full', 'mt-2'] : 'w-[calc(100%-200px)]']"
-    >
+    <div :class="[deviceDetection() ? ['w-full', 'mt-2'] : 'w-[calc(100%-200px)]']">
       <el-form
         ref="formRef"
         :inline="true"
@@ -69,28 +67,13 @@ const {
         class="search-form bg-bg_color w-full pl-8 pt-3 overflow-auto"
       >
         <el-form-item label="用户名称：" prop="username">
-          <el-input
-            v-model="form.username"
-            placeholder="请输入用户名称"
-            clearable
-            class="w-45!"
-          />
+          <el-input v-model="form.username" placeholder="请输入用户名称" clearable class="w-45!" />
         </el-form-item>
         <el-form-item label="手机号码：" prop="phone">
-          <el-input
-            v-model="form.phone"
-            placeholder="请输入手机号码"
-            clearable
-            class="w-45!"
-          />
+          <el-input v-model="form.phone" placeholder="请输入手机号码" clearable class="w-45!" />
         </el-form-item>
         <el-form-item label="状态：" prop="status">
-          <el-select
-            v-model="form.status"
-            placeholder="请选择"
-            clearable
-            class="w-45!"
-          >
+          <el-select v-model="form.status" placeholder="请选择" clearable class="w-45!">
             <el-option label="已开启" value="1" />
             <el-option label="已关闭" value="0" />
           </el-select>
@@ -104,23 +87,13 @@ const {
           >
             搜索
           </el-button>
-          <el-button :icon="useRenderIcon(Refresh)" @click="resetForm(formRef)">
-            重置
-          </el-button>
+          <el-button :icon="useRenderIcon(Refresh)" @click="resetForm(formRef)"> 重置 </el-button>
         </el-form-item>
       </el-form>
 
-      <PureTableBar
-        title="用户管理（仅演示，操作后不生效）"
-        :columns="columns"
-        @refresh="onSearch"
-      >
+      <PureTableBar title="用户管理（仅演示，操作后不生效）" :columns="columns" @refresh="onSearch">
         <template #buttons>
-          <el-button
-            type="primary"
-            :icon="useRenderIcon(AddFill)"
-            @click="openDialog()"
-          >
+          <el-button type="primary" :icon="useRenderIcon(AddFill)" @click="openDialog()">
             新增用户
           </el-button>
         </template>
@@ -137,15 +110,11 @@ const {
               >
                 已选 {{ selectedNum }} 项
               </span>
-              <el-button type="primary" text @click="onSelectionCancel">
-                取消选择
-              </el-button>
+              <el-button type="primary" text @click="onSelectionCancel"> 取消选择 </el-button>
             </div>
             <el-popconfirm title="是否确认删除?" @confirm="onbatchDel">
               <template #reference>
-                <el-button type="danger" text class="mr-1!">
-                  批量删除
-                </el-button>
+                <el-button type="danger" text class="mr-1!"> 批量删除 </el-button>
               </template>
             </el-popconfirm>
           </div>
@@ -163,7 +132,7 @@ const {
             :pagination="{ ...pagination, size }"
             :header-cell-style="{
               background: 'var(--el-fill-color-light)',
-              color: 'var(--el-text-color-primary)'
+              color: 'var(--el-text-color-primary)',
             }"
             @selection-change="handleSelectionChange"
             @page-size-change="handleSizeChange"

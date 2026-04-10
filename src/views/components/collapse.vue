@@ -2,7 +2,7 @@
 import { ref } from "vue";
 
 defineOptions({
-  name: "Collapse"
+  name: "Collapse",
 });
 
 const radio = ref();
@@ -31,7 +31,7 @@ const handleChange = (val: string[]) => {
         <el-space wrap :size="40">
           <el-link
             v-tippy="{
-              content: '点击查看详细文档'
+              content: '点击查看详细文档',
             }"
             href="https://element-plus.org/zh-CN/component/collapse.html"
             target="_blank"
@@ -65,18 +65,10 @@ const handleChange = (val: string[]) => {
       :accordion="radio === 'accordion' ? true : false"
       @change="handleChange"
     >
-      <el-collapse-item title="周一" name="1">
-        周一启航，新的篇章
-      </el-collapse-item>
-      <el-collapse-item title="周二" name="2">
-        周二律动，携手共进
-      </el-collapse-item>
-      <el-collapse-item title="周三" name="3">
-        周三昂扬，激情不减
-      </el-collapse-item>
-      <el-collapse-item title="周四" name="4">
-        周四精进，事半功倍
-      </el-collapse-item>
+      <el-collapse-item title="周一" name="1"> 周一启航，新的篇章 </el-collapse-item>
+      <el-collapse-item title="周二" name="2"> 周二律动，携手共进 </el-collapse-item>
+      <el-collapse-item title="周三" name="3"> 周三昂扬，激情不减 </el-collapse-item>
+      <el-collapse-item title="周四" name="4"> 周四精进，事半功倍 </el-collapse-item>
       <el-collapse-item name="5">
         <template #title>
           周五

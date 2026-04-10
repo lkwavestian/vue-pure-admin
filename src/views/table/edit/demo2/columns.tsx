@@ -11,14 +11,8 @@ export function useColumns() {
       label: "姓名",
       prop: "name",
       cellRenderer: ({ row, index }) => (
-        <>
-          {editMap.value[index]?.editable ? (
-            <el-input v-model={row.name} />
-          ) : (
-            <p>{row.name}</p>
-          )}
-        </>
-      )
+        <>{editMap.value[index]?.editable ? <el-input v-model={row.name} /> : <p>{row.name}</p>}</>
+      ),
     },
     {
       label: "性别",
@@ -38,7 +32,7 @@ export function useColumns() {
             <p>{row.sex === 0 ? "男" : "女"}</p>
           )}
         </>
-      )
+      ),
     },
     {
       label: "爱好",
@@ -47,23 +41,17 @@ export function useColumns() {
         <>
           {editMap.value[index]?.editable ? (
             <el-select v-model={row.hobby} clearable placeholder="请选择爱好">
-              {options.map(item => {
-                return (
-                  <el-option
-                    key={item.value}
-                    label={item.label}
-                    value={item.value}
-                  />
-                );
+              {options.map((item) => {
+                return <el-option key={item.value} label={item.label} value={item.value} />;
               })}
             </el-select>
           ) : (
             <el-tag type="primary">
-              {options.filter(opt => opt.value == row.hobby)[0]?.label}
+              {options.filter((opt) => opt.value == row.hobby)[0]?.label}
             </el-tag>
           )}
         </>
-      )
+      ),
     },
     {
       label: "日期",
@@ -83,13 +71,13 @@ export function useColumns() {
           )}
         </>
       ),
-      minWidth: 110
+      minWidth: 110,
     },
     {
       label: "操作",
       fixed: "right",
-      slot: "operation"
-    }
+      slot: "operation",
+    },
   ];
 
   function onEdit(row, index) {
@@ -111,6 +99,6 @@ export function useColumns() {
     dataList,
     onEdit,
     onSave,
-    onCancel
+    onCancel,
   };
 }

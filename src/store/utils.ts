@@ -6,7 +6,7 @@ export {
   ascending,
   filterTree,
   filterNoPermissionTree,
-  formatFlatteningRoutes
+  formatFlatteningRoutes,
 } from "@/router/utils";
 export {
   isUrl,
@@ -16,13 +16,6 @@ export {
   isBoolean,
   getKeyList,
   storageLocal,
-  deviceDetection
+  deviceDetection,
 } from "@pureadmin/utils";
-export type {
-  setType,
-  appType,
-  userType,
-  multiType,
-  cacheType,
-  positionType
-} from "./types";
+export type { setType, appType, userType, multiType, cacheType, positionType } from "./types";

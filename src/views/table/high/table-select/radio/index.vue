@@ -3,14 +3,8 @@ import { ref } from "vue";
 import { useColumns } from "./columns";
 
 const selectRef = ref();
-const {
-  columns,
-  pagination,
-  selectValue,
-  tableDataEdit,
-  rowStyle,
-  onRowClick
-} = useColumns(selectRef);
+const { columns, pagination, selectValue, tableDataEdit, rowStyle, onRowClick } =
+  useColumns(selectRef);
 </script>
 
 <template>
@@ -29,7 +23,7 @@ const {
           alignWhole="center"
           :header-cell-style="{
             background: 'var(--el-fill-color-light)',
-            color: 'var(--el-text-color-primary)'
+            color: 'var(--el-text-color-primary)',
           }"
           :row-style="rowStyle"
           :data="

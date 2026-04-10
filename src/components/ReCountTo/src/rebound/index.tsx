@@ -1,11 +1,5 @@
 import "./rebound.css";
-import {
-  ref,
-  unref,
-  onBeforeMount,
-  defineComponent,
-  onBeforeUnmount
-} from "vue";
+import { ref, unref, onBeforeMount, defineComponent, onBeforeUnmount } from "vue";
 import { reboundProps } from "./props";
 
 export default defineComponent({
@@ -17,7 +11,7 @@ export default defineComponent({
 
     onBeforeMount(() => {
       const ua = navigator.userAgent.toLowerCase();
-      const testUA = regexp => regexp.test(ua);
+      const testUA = (regexp) => regexp.test(ua);
       const isSafari = testUA(/safari/g) && !testUA(/chrome/g);
 
       // Safari浏览器的兼容代码
@@ -39,10 +33,7 @@ export default defineComponent({
 
     return () => (
       <>
-        <div
-          class="scroll-num"
-          style={{ "--i": props.i, "--delay": props.delay }}
-        >
+        <div class="scroll-num" style={{ "--i": props.i, "--delay": props.delay }}>
           <ul ref="ulRef" style={{ fontSize: "32px" }}>
             <li>0</li>
             <li>1</li>
@@ -59,14 +50,11 @@ export default defineComponent({
 
           <svg width="0" height="0">
             <filter id="blur">
-              <feGaussianBlur
-                in="SourceGraphic"
-                stdDeviation={`0 ${props.blur}`}
-              />
+              <feGaussianBlur in="SourceGraphic" stdDeviation={`0 ${props.blur}`} />
             </filter>
           </svg>
         </div>
       </>
     );
-  }
+  },
 });

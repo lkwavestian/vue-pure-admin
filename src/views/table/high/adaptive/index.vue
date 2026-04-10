@@ -12,7 +12,7 @@ const {
   loadingConfig,
   adaptiveConfig,
   onSizeChange,
-  onCurrentChange
+  onCurrentChange,
 } = useColumns();
 </script>
 
